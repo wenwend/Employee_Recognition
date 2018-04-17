@@ -15,14 +15,17 @@ var client = new Client({
 client.connect();
 
 /*GET home page*/
-module.exports.index = function(req,res,next){
+module.exports.index = function(req,res){
+	//res.render('index',{err:"something went terribly wrong!"});
+	res.render('index',{ title: 'Employee Recognition HOME PAGE'});
+};
+
+module.exports.login=function(req,res,next){
 	client.query('SELECT * FROM test;', function(err,result){
 		if(err){
 			return next(err);
 		}
 		res.json(result.rows);
 	});
-	res.render('index',{err:"something went terribly wrong!"});
-			//res.render('index',{ title: 'Employee Recognition HOME PAGE'})
-	
+	//res.render('login');
 };

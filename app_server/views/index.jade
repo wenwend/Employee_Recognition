@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	.container
+		.header
+			nav
+				ul
+					li
+						a.active(href='/') Home
+					li
+						a(href='/login') Admin
+					li
+						a(href='https://github.com/wenwend/Employee_Recognition') About
+					li
+						a(href='/') FAQs
+		.jumbotron
+			h1 LYNX
+			p Welcome to #{title}!
+			p
+				a.btn(href='/login',role='button') LOGIN
+
+
+		//site footer
+		hr.my-4
+		footer.footer
+			p © Software Capstone I | Group Lynx | <a href="https://github.com/wenwend/Employee_Recognition">Source
