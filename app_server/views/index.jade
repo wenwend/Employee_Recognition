@@ -1,24 +1,42 @@
 extends layout
 
 block content
-	.container
-		.header
-			nav
-				ul
-					li
-						a.active(href='/') Home
-					li
-						a(href='/login') Admin
-					li
-						a(href='https://github.com/wenwend/Employee_Recognition') About
-					li
-						a(href='/') FAQs
-		.jumbotron
-			h1 LYNX
-			p Welcome to #{title}!
-			p
-				a.btn(href='/login',role='button') LOGIN
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between
+				a.py-2.d-none.d-md-inline-block(href='/') LOGO
+				a.py-2(href='/') Home
+				a.py-2.d-none.d-md-inline-block(href='/login') Admin
+				a.py-2.d-none.d-md-inline-block(href='https://github.com/wenwend/Employee_Recognition') About
+					
+				a.py-2.d-none.d-md-inline-block(href='/') FAQs
+				
 
+		.position-relative.overflow-hidden.p-3.p-md-5.m-md-3.text-center.bg-light
+			col-md-5.p-lg-5.mx-auto.my-5
+				h1.display-4.font-weight-normal Employee Reward Program
+			p Welcome to #{title}!
+			p I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel. —Maya Angelou
+			p
+				a.btn.btn-outline-secondary(href='/login',role='button') LOGIN
+
+		.container
+			h1.display-4.font-weight-normal.text-center About the Awards
+			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
+				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
+					my-3.py-3
+						h2.display-5 Employee of Month/Quarter
+						p.lead You made it!
+
+				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
+					my-3.py-3
+						h2.display-5 Employee of the Year
+						p.lead You made it!
+
+				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
+					my-3.py-3
+						h2.display-5 Special Recognition
+						p.lead You made it!
 
 		//site footer
 		hr.my-4
