@@ -20,12 +20,23 @@ module.exports.index = function(req,res){
 	res.render('index',{ title: 'Employee Recognition HOME PAGE'});
 };
 
-module.exports.login=function(req,res,next){
-	client.query('SELECT * FROM test;', function(err,result){
+module.exports.login=function(req,res){
+	/*client.query('SELECT * FROM test;', function(err,result){
 		if(err){
 			return next(err);
 		}
 		res.json(result.rows);
-	});
-	//res.render('login');
+	});*/
+	res.render('login');
+};
+
+
+module.exports.adminLogin=function(req,res){
+	/*client.query('SELECT * FROM test;', function(err,result){
+		if(err){
+			return next(err);
+		}
+		res.json(result.rows);
+	});*/
+	res.render('adminLogin');
 };

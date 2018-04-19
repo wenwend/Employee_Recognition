@@ -3,12 +3,11 @@ extends layout
 block content
 	.header
 		nav.site_header.sticky-top.py-1
-			container.d-flex.flex-column.flex-md-row.justify-content-between
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark
 				a.py-2.d-none.d-md-inline-block(href='/') LOGO
 				a.py-2(href='/') Home
-				a.py-2.d-none.d-md-inline-block(href='/login') Admin
-				a.py-2.d-none.d-md-inline-block(href='https://github.com/wenwend/Employee_Recognition') About
-					
+				a.py-2.d-none.d-md-inline-block(href='/login') LOGIN
+				a.py-2.d-none.d-md-inline-block(href='/adminLogin') Admin
 				a.py-2.d-none.d-md-inline-block(href='/') FAQs
 				
 
@@ -18,7 +17,17 @@ block content
 			p Welcome to #{title}!
 			p I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel. —Maya Angelou
 			p
-				a.btn.btn-outline-secondary(href='/login',role='button') LOGIN
+				a.btn.btn-outline-secondary(href='/login',role='button') Employee LOGIN
+
+		.container
+			h1.display-4.font-weight-normal.text-center Admin tool
+			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
+
+				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
+					my-3.py-3
+						h2.display-5 Admin LOGIN
+						p
+							a.btn.btn-outline-secondary(href='/adminLogin',role='button') LOGIN
 
 		.container
 			h1.display-4.font-weight-normal.text-center About the Awards
