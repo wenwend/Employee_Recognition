@@ -10,7 +10,11 @@ var session = require('express-session');
 //route 
 var index = require('./app_server/routes/index');
 var login = require('./app_server/routes/login');
+var postLogin = require('./app_server/routes/postLogin');
 var adminLogin = require('./app_server/routes/adminLogin');
+var postLoginAdmin = require('./app_server/routes/postLoginAdmin');
+var mainMenu = require('./app_server/routes/mainMenu');
+var mainMenuAdmin = require('./app_server/routes/mainMenuAdmin');
 
 var app = express();
 
@@ -33,6 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/login',login);
 app.use('/adminLogin',adminLogin);
+app.use('/postLogin',postLogin);
+app.use('/postLoginAdmin',postLoginAdmin);
+app.use('/mainMenu',mainMenu);
+app.use('/mainMenuAdmin',mainMenuAdmin);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

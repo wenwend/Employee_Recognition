@@ -1,6 +1,10 @@
 extends layout
 
 block content
+	if err
+		.alert.alert-danger.aler-dismissable.fade.show(role="alert") #{err}
+			button.close(type="button" data-dismiss="alert" aria-label="close")
+				span(aria-hidden="true") &times;
 
 	.container.text-center
 		form(action='/postLogin',method='post')
@@ -12,4 +16,4 @@ block content
 				
 			input.btn.btn-primary.btn-block(type="submit", id="loginSubmit")
 
-			p.mt-5.mb-3.text-muted &copy; 2018
+		p.mt-5.mb-3.text-muted &copy; 2018

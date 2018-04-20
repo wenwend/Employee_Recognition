@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
+				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
+				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+
+		container-fluid
+			row.col-md-2.d-none.d-md-block.bg-light.sidebar
+				sidebar-sticky.nav.flex-column
+					nav-item
+						a.nav-link.active(href="/") Dashboard
+					nav-item
+						a.nav-link(href="/") Add user
+					nav-item
+						a.nav-link(href="/") Manage User
+					nav-item
+						a.nav-link(href="/") Add admin
+					nav-item
+						a.nav-link(href="/") Manage admin
+					nav-item
+						a.nav-link(href="/") Business analysis
+
+
+	.container
+		h1 Welcome #{name}!
