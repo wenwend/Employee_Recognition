@@ -1,1 +1,6 @@
 Employee Recognition 
+
+Write a web applicaiton to manage employee recognition awards.
+
+Using NodeMailer to send new user an activation email.
+	https://github.com/nodemailer/nodemailer

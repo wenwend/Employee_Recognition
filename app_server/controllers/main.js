@@ -1,6 +1,14 @@
 var request = require('request');
 var rp = require('request-promise-native');
 var moment = require('moment');
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+ service: 'gmail',
+ auth: {
+        user: 'lynx.no.reploy@gmail.com',
+        pass: 'admini_strator_2018'
+    }
+});
 
 const { Client } = require('pg');
 var client = new Client({
@@ -14,6 +22,25 @@ var client = new Client({
 
 client.connect();
 
+function followMail(e_mail,s_ubject,url){
+
+
+	url="https://pacific-thicket-81385.herokuapp.com"+url;
+ 	
+	const mailOptions = {
+	from: 'lynx.no.reply@gmail.com', // sender address
+	to: e_mail, // list of receivers
+ 	subject: s_ubject, // Subject line
+ 	text: url // plain text body
+};
+
+transporter.sendMail(mailOptions, function (err, info) {
+   if(err)
+     console.log(err)
+   else
+     console.log(info);
+});
+}
 /*GET home page*/
 module.exports.index = function(req,res){
 	//res.render('index',{err:"something went terribly wrong!"});
@@ -112,6 +139,7 @@ module.exports.postNewEmployee=function(req,res,next){
 			return next(err);
 		}
 		//res.send(200);
+		followMail(data.email,"Activation Account","/mainMenu");
 		res.render('mainMenuAdmin',{name:req.session.email});
 		});
 	} else{
@@ -123,13 +151,15 @@ module.exports.postNewEmployee=function(req,res,next){
 module.exports.postNewAdmin=function(req,res,next){
 	if(req.session.userId && req.session.userType =='A'){
 		const data=req.body;
-		//console.log(data)
+		console.log(data);
+
 		client.query('INSERT INTO admin(email, password, admin_id) VALUES ($1,$2,$3);',
 			[data.email, data.pass, req.session.userId], function(err,result){
 		if(err){
 			return next(err);
 		}
 		//res.send(200);
+		followMail(data.email,"Activation Account","/mainMenuAdmin");
 		res.render('mainMenuAdmin',{name:req.session.email});
 		});
 	} else{
