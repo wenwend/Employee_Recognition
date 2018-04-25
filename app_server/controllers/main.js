@@ -76,9 +76,64 @@ module.exports.mainMenu=function(req,res){
 
 module.exports.mainMenuAdmin=function(req,res){
 	if(req.session.userId && req.session.userType =='A'){
-		res.render('mainMenuAdmin',{name:req.session.userName});
+		res.render('mainMenuAdmin',{name:req.session.email});
 	}
 	else{
 		res.render('adminLogin',{err:"You must log in as an Admin to access"});
 	}
 };
+
+module.exports.addEmployee=function(req,res){
+	if(req.session.userId && req.session.userType =='A'){
+		res.render('addEmployee');
+	}
+	else{
+	res.render('adminLogin',{err:"You must log in as an Admin to access!"});
+	}
+};
+
+module.exports.addAdmin=function(req,res){
+	if(req.session.userId && req.session.userType =='A'){
+		res.render('addAdmin');
+	}
+	else{
+		res.render('adminLogin',{err:"You must log in as an Admin to access"});
+	}
+};
+
+//postNewEmployee
+module.exports.postNewEmployee=function(req,res,next){
+	if(req.session.userId && req.session.userType =='A'){
+		const data=req.body;
+		//console.log(data)
+		client.query('INSERT INTO employee(username, password, admin_id) VALUES ($1,$2,$3);',
+			[data.email, data.pass, req.session.userId], function(err,result){
+		if(err){
+			return next(err);
+		}
+		//res.send(200);
+		res.render('mainMenuAdmin',{name:req.session.email});
+		});
+	} else{
+			res.render('adminLogin',{err:"Invalid credentials"});
+	}
+};
+
+//postNewAdmin
+module.exports.postNewAdmin=function(req,res,next){
+	if(req.session.userId && req.session.userType =='A'){
+		const data=req.body;
+		//console.log(data)
+		client.query('INSERT INTO admin(email, password, admin_id) VALUES ($1,$2,$3);',
+			[data.email, data.pass, req.session.userId], function(err,result){
+		if(err){
+			return next(err);
+		}
+		//res.send(200);
+		res.render('mainMenuAdmin',{name:req.session.email});
+		});
+	} else{
+			res.render('adminLogin',{err:"Invalid credentials"});
+	}
+};
+

@@ -15,6 +15,9 @@ var adminLogin = require('./app_server/routes/adminLogin');
 var postLoginAdmin = require('./app_server/routes/postLoginAdmin');
 var mainMenu = require('./app_server/routes/mainMenu');
 var mainMenuAdmin = require('./app_server/routes/mainMenuAdmin');
+var addAdmin = require('./app_server/routes/addAdmin');
+var addEmployee = require('./app_server/routes/addEmployee');
+var postNewEmployee = require('./app_server/routes/postNewEmployee');
 
 var app = express();
 
@@ -41,6 +44,9 @@ app.use('/postLogin',postLogin);
 app.use('/postLoginAdmin',postLoginAdmin);
 app.use('/mainMenu',mainMenu);
 app.use('/mainMenuAdmin',mainMenuAdmin);
+app.use('/addAdmin',addAdmin);
+app.use('/addEmployee',addEmployee);
+app.use('/postNewEmployee',postNewEmployee);
 
 
 // catch 404 and forward to error handler

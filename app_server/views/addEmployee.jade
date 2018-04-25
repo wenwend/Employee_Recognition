@@ -1,0 +1,38 @@
+extends layout
+
+block content
+
+	.container
+		form(action='postNewEmployee', method='post' id='add-user-form')
+			fieldset(id='addE')
+				legend Add a new Employee
+				.form-group
+					label(for='email') Email
+					input.form_control(required type='email' id='email' name='email' placeholder='enter an email as your username')
+					.invalid-feedback Enter a valid email address
+				.form-group
+					label(for='pass') Password
+					input.form_control(required type='password' id='pass' name='pass' placeholder='123456')
+					.invalid-feedback Enter a valid password
+					input.btn.btn-primary.btn-block(type="submit", id="sendNewEmployee")
+
+	script.
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			addValidation();
+		})
+	
+		function addValidation() {
+		var form = document.getElementById('add-user-form');
+		form.addEventListener('submit', function(event) {
+			if (form.checkValidity() === false ) {
+				event.preventDefault();
+				event.stopPropagation();
+				alert('Check your input again!');
+				}else{
+					alert('Success!');
+				}
+			
+			}, false);
+		}
+

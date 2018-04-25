@@ -7,21 +7,29 @@ block content
 				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
 				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
 
-		container-fluid
-			row.col-md-2.d-none.d-md-block.bg-light.sidebar
-				sidebar-sticky.nav.flex-column
-					nav-item
+	container-fluid
+		row
+			nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+				sidebar-sticky
+					nav.flex-column
+					
 						a.nav-link.active(href="/") Dashboard
-					nav-item
+					
 						a.nav-link(href="/") Account
-					nav-item
+					
 						a.nav-link(href="/") Update Password
-					nav-item
+					
 						a.nav-link(href="/") Signature
-					nav-item
+					
 						a.nav-link(href="/") Create Award
-					nav-item
+
 						a.nav-link(href="/") Manage Award
 
-		.container
-			h1 HI, #{name}!
+		main.col-md-9.ml-sm-auto.col-lg-10.px-4
+			d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+				h2 HI, #{name}!
+				btn-toolbar.mb-2.mb-md-0
+					btn-group.mr-2
+						button.btn.btn-sm.btn-outline-secondary Share
+						button.btn.btn-sm.btn-outline-secondary Export
+
