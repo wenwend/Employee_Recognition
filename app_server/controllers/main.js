@@ -94,7 +94,7 @@ module.exports.postLoginAdmin=function(req,res,next){
 
 module.exports.mainMenu=function(req,res){
 	if(req.session.userId && req.session.userType =='E'){
-		res.render('mainMenu',{name:req.session.userName});
+		res.render('mainMenu',{name:req.session.email});
 	}
 	else{
 	res.render('login',{err:"You must log in as an Employee to access!"});
@@ -127,7 +127,15 @@ module.exports.addAdmin=function(req,res){
 		res.render('adminLogin',{err:"You must log in as an Admin to access"});
 	}
 };
-
+//addAward
+module.exports.addAward=function(req,res){
+	if(req.session.userId && req.session.userType =='E'){
+		res.render('addAward',{ name:req.session.email });
+	}
+	else{
+	res.render('login',{err:"You must log in as an Employee to access!"});
+	}
+};
 //postNewEmployee
 module.exports.postNewEmployee=function(req,res,next){
 	if(req.session.userId && req.session.userType =='A'){
@@ -167,3 +175,23 @@ module.exports.postNewAdmin=function(req,res,next){
 	}
 };
 
+//postNewAdmin
+module.exports.postNewAward=function(req,res,next){
+	console.log(req.body);
+	if(req.session.userId && req.session.userType =='E'){
+		const data=req.body;
+		console.log(data);
+
+		client.query('INSERT INTO award(type, given_fname, given_lname, given_email, e_id, given_date,given_time) VALUES ($1,$2,$3,$4,$5,$6,$7);',
+			[data.type, data.fname, data.lname, data.email, req.session.userId, data.date, data.time], function(err,result){
+		if(err){
+			return next(err);
+		}
+		//res.send(200);
+		followMail(data.email,"You got a reward!","/mainMenuAdmin");
+		res.render('mainMenu',{name:req.session.email});
+		});
+	} else{
+			res.render('login',{err:"Invalid credentials"});
+	}
+};

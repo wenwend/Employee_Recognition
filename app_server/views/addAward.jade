@@ -1,0 +1,57 @@
+extends layout
+
+block content
+
+	.container
+		.h3 Hi, {{ name }} 
+
+	.container
+		form(action='/postNewAward', method='post' id='add-award-form')
+			fieldset(id='addA')
+				legend Add a New Award
+				.form-group
+				label(for='email') Receiver's E-mail:
+				input.form_control(required type='email' id='email' name='email' placeholder='Email you want send to')
+				.invalid-feedback Enter a valid email address
+				.form-group
+				label(for='fname') Receiver's First Name:
+				input.form_control(required type='text' id='' name='fname' placeholder='First name')
+				.form-group
+				label(for='lname') Receiver's Last Name:
+				input.form_control(required type='text' id='' name='lname' placeholder='Last name')
+				.form-group
+				label(for='date') Send Date :
+				input.form_control(required type='date' id='date' name='date')
+				.form-group
+				label(for='time') Send Time :
+				input.form_control(required type='time' id='time' name='time')
+				.form-group
+				label(for='type') Award Title:
+				select.form_control(id='type' name ='type') 
+					option(value=0) -Choice-
+					option(value=1) Employee of Month
+					option(value=2) Employee of Quarter 
+					option(value=3) Employee of Year
+					option(value=4) Special Award
+
+				input.btn.btn-primary.btn-block(type="submit", id="sendNewEmployee")
+
+	script.
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			addValidation();
+		})
+	
+		function addValidation() {
+		var form = document.getElementById('add-award-form');
+		form.addEventListener('submit', function(event) {
+			if (new Date(document.getElementById('date').value + ' ' + document.getElementById('time').value) < Date.now() || document.getElementById('type').value == 0) {
+				event.preventDefault();
+				event.stopPropagation();
+				alert('Check the award or the date passed!');
+				}else{
+					alert('Success!');
+				}
+			}, false);
+		}
+

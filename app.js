@@ -16,9 +16,11 @@ var postLoginAdmin = require('./app_server/routes/postLoginAdmin');
 var mainMenu = require('./app_server/routes/mainMenu');
 var mainMenuAdmin = require('./app_server/routes/mainMenuAdmin');
 var addAdmin = require('./app_server/routes/addAdmin');
+var addAward = require('./app_server/routes/addAward');
 var addEmployee = require('./app_server/routes/addEmployee');
 var postNewEmployee = require('./app_server/routes/postNewEmployee');
 var postNewAdmin = require('./app_server/routes/postNewAdmin');
+var postNewAward = require('./app_server/routes/postNewAward');
 
 
 var app = express();
@@ -47,9 +49,11 @@ app.use('/postLoginAdmin',postLoginAdmin);
 app.use('/mainMenu',mainMenu);
 app.use('/mainMenuAdmin',mainMenuAdmin);
 app.use('/addAdmin',addAdmin);
+app.use('/addAward',addAward);
 app.use('/addEmployee',addEmployee);
 app.use('/postNewEmployee',postNewEmployee);
 app.use('/postNewAdmin',postNewAdmin);
+app.use('/postNewAward',postNewAward);
 
 
 // catch 404 and forward to error handler
