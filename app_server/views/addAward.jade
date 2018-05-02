@@ -2,10 +2,32 @@ extends layout
 
 block content
 
-	.container
-		.h3 Hi, {{ name }} 
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
+				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
+				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+
+	container-fluid
+		row
+			nav.col-sm-3.col-md-3.d-none.d-md-block.bg-light.sidebar
+				sidebar-sticky
+					nav.flex-column
+					
+						a.nav-link.active(href="/") Dashboard
+					
+						a.nav-link(href="/") Account
+					
+						a.nav-link(href="/newPassEmployee") Update Password
+					
+						a.nav-link(href="/") Signature
+					
+						a.nav-link(href="/addAward") Create Award
+
+						a.nav-link(href="/") Manage Award
 
 	.container
+		h2 HI, #{name}!
 		form(action='/postNewAward', method='post' id='add-award-form')
 			fieldset(id='addA')
 				legend Add a New Award

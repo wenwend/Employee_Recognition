@@ -21,6 +21,8 @@ var addEmployee = require('./app_server/routes/addEmployee');
 var postNewEmployee = require('./app_server/routes/postNewEmployee');
 var postNewAdmin = require('./app_server/routes/postNewAdmin');
 var postNewAward = require('./app_server/routes/postNewAward');
+var newPassEmployee =require('./app_server/routes/newPassEmployee');
+var postPassEmployee =require('./app_server/routes/postPassEmployee');
 
 
 var app = express();
@@ -54,7 +56,8 @@ app.use('/addEmployee',addEmployee);
 app.use('/postNewEmployee',postNewEmployee);
 app.use('/postNewAdmin',postNewAdmin);
 app.use('/postNewAward',postNewAward);
-
+app.use('/newPassEmployee',newPassEmployee);
+app.use('/postPassEmployee',postPassEmployee);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

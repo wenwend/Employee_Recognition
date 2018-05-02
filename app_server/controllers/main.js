@@ -195,3 +195,34 @@ module.exports.postNewAward=function(req,res,next){
 			res.render('login',{err:"Invalid credentials"});
 	}
 };
+
+//newPassEmployee
+module.exports.newPassEmployee=function(req,res){
+	if(req.session.userId && req.session.userType =='E'){
+		res.render('newPassEmployee',{name:req.session.email});
+	}
+	else{
+	res.render('login',{err:"You must log in as an Employee to access!"});
+	}
+};
+
+//postPassEmployee
+module.exports.postPassEmployee=function(req,res,next){
+	
+	if(req.session.userId && req.session.userType =='E'){
+		const data=req.body;
+		console.log(data);
+
+		client.query("UPDATE employee SET password = ($1) WHERE id = ($2);",
+			[data.pass1, req.session.userId], function(err,result){
+		if(err){
+			return next(err);
+		}
+		//res.send(200);
+		//followMail(data.email, "You Changed your password!","/mainMenu");
+		res.render('mainMenu',{ name:req.session.email });
+		});
+	} else{
+		res.render('login', {err:"Invalid credentials"});
+	}
+};

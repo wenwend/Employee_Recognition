@@ -1,0 +1,66 @@
+extends layout
+
+block content
+
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
+				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
+				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+
+	container-fluid
+		row
+			nav.col-sm-3.col-md-3.d-none.d-md-block.bg-light.sidebar
+				sidebar-sticky
+					nav.flex-column
+					
+						a.nav-link.active(href="/") Dashboard
+					
+						a.nav-link(href="/") Account
+					
+						a.nav-link(href="/newPassEmployee") Update Password
+					
+						a.nav-link(href="/") Signature
+					
+						a.nav-link(href="/addAward") Create Award
+
+						a.nav-link(href="/") Manage Award
+
+		
+	.container
+		form(action='/postPassEmployee', method='post')
+			fieldset
+				legend Update your password
+				.form-group
+					label(for='pass1') Enter your Password
+					input.form_control(required type='password' id='pass1' name='pass1' placeholder='password')
+					
+				.form-group
+					label(for='pass2') Enter your Password Again!
+					input.form_control(required type='password' id='pass2' name='pass2' placeholder='password' onkeyup="checkPass(); return false;")
+					
+					input.btn.btn-primary.btn-block(type="submit", id="sendNewPass")
+
+	script.
+
+		
+
+		function checkPass(){
+		var pass1 =document.getElementById('pass1');
+		var pass2 =document.getElementById('pass2');
+		var message = document.getElementById('sendNewPass');
+
+		var goodColor = "#66cc66";
+		var badColor = "#ff6666";
+
+		if(pass1.value == pass2.value){
+			pass2.style.backgroundColor = goodColor;
+			message.style.color = goodColor;
+			message.innerHTML = "Passwords Match!"
+		}else{
+			pass2.style.backgroundColor = badColor;
+			message.style.color = badColor;
+			message.innerHTML = "Passwords Do Not Match!"
+		}
+		}
+
