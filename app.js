@@ -23,7 +23,14 @@ var postNewAdmin = require('./app_server/routes/postNewAdmin');
 var postNewAward = require('./app_server/routes/postNewAward');
 var newPassEmployee =require('./app_server/routes/newPassEmployee');
 var postPassEmployee =require('./app_server/routes/postPassEmployee');
-
+var addSignature = require('./app_server/routes/addSignature');
+var postSignature = require('./app_server/routes/postSignature');
+var accountDetail = require('./app_server/routes/accountDetail');
+var awards = require('./app_server/routes/awards');
+var deleteEmployee = require('./app_server/routes/deleteEmployee');
+var employees = require('./app_server/routes/employees');
+var admins = require('./app_server/routes/admins');
+var deleteAdmins = require('./app_server/routes/deleteAdmins');
 
 var app = express();
 
@@ -58,6 +65,14 @@ app.use('/postNewAdmin',postNewAdmin);
 app.use('/postNewAward',postNewAward);
 app.use('/newPassEmployee',newPassEmployee);
 app.use('/postPassEmployee',postPassEmployee);
+app.use('/addSignature',addSignature);
+app.use('/postSignature',postSignature);
+app.use('/accountDetail',accountDetail);
+app.use('/awards',awards);
+app.use('/employees',employees);
+app.use('/deleteEmployee',deleteEmployee);
+app.use('/deleteAdmins',deleteAdmins);
+app.use('/admins',admins);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

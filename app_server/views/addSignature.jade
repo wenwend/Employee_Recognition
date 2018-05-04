@@ -1,0 +1,123 @@
+extends layout
+
+block content
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
+				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
+				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+
+	container-fluid
+		row
+			nav.col-sm-3.col-md-3.d-none.d-md-block.bg-light.sidebar
+				sidebar-sticky
+					nav.flex-column
+						a.nav-link.active(href="/mainMenu") Dashboard
+					
+						a.nav-link(href="/accountDetail") Account
+					
+						a.nav-link(href="/newPassEmployee") Update Password
+					
+						a.nav-link(href="/addSignature") Update Signature
+					
+						a.nav-link(href="/addAward") Create Award
+
+						a.nav-link(href="/awards") Manage Award
+			
+			main.col-md-9.ml-sm-auto.col-lg-10.px-4
+				h2 HI, #{name}!
+				.container(id="tabs")
+					ul.nav.nav-pills.nav-fill
+						li.nav-item
+							a.nav-link(href="#1" data-toggle="tab") Upload a New Signature
+						li.nav-item
+							a.nav-link.active(href="#2" data-toggle="tab") Create a New Signature
+
+				.tab-content
+					.tab-pane(id="1")
+						br
+						form(action='/postSignature', method='post' id='upload-signature')
+							input.form_control#inp(type='file')
+							p#b64
+							img#img(height='150')
+							input.form_control(type='hidden' id='filename' name ='filename')
+							input.btn.btn-primary.btn-block(type="submit", id="uploadSignature")
+
+					.tab-pane.active(id="2")
+				
+						lable(for='signature') Update Signature
+						br
+						canvas#signature(width='450',height='150', style="border: 1px solid #ddd;")
+						br
+						button#clearButton Clear
+						button#undoButton Undo
+						form(action='postSignature', method='post' id='add-signature')
+							input.form_control(type='hidden' id='filename' name ='filename')
+							input.btn.btn-primary.btn-block(type="submit", id="sendSignature")
+
+
+	script.
+		
+		
+
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			addCanvas();
+		});
+
+		function addCanvas(){
+			var canvas = document.getElementById("signature");
+			var form =document.getElementById("add-signature");
+			var signaturePad = new SignaturePad(canvas, {
+				backgroundColor: 'rgb(255, 255, 255)'
+			});
+			
+			//attach value to hidden input 
+			form.addEventListener('submit', function(event) {
+			if (signaturePad.isEmpty() === true) {
+				event.preventDefault();
+				event.stopPropagation();
+			}else{
+				var fileData = signaturePad.toDataURL(); //pvg file in URI
+				document.getElementsByName("filename")[0].setAttribute("value", fileData);
+				console.log(document.getElementById("filename").value);
+				}
+			
+			}, false);
+			
+			//clear the canvas
+			clearButton.addEventListener("click", function (event) {
+				signaturePad.clear();
+			});
+
+			//undo 
+			undoButton.addEventListener("click", function (event) {
+			var data = signaturePad.toData();
+			if (data) {
+				data.pop(); // remove the last dot or line
+				signaturePad.fromData(data);
+				}
+			});
+		}
+		
+		document.getElementById("inp").addEventListener('change',readFile);
+		document.getElementById("upload-signature").addEventListener('submit',function(event){
+			event.preventDefault();
+			console.log(document.getElementById("b64").value);
+
+		}, false);
+
+		function readFile(){
+
+			if (this.files && this.files[0]) {
+				var FR= new FileReader();
+
+				FR.addEventListener("load", function(e) {
+				document.getElementById("img").src = e.target.result;
+				document.getElementById("b64").value = e.target.result;
+			}); 
+	
+				FR.readAsDataURL( this.files[0] );
+			}
+
+		}

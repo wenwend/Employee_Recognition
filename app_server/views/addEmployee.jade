@@ -1,20 +1,41 @@
 extends layout
 
 block content
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
+				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
+				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
 
-	.container
-		form(action='postNewEmployee', method='post' id='add-user-form')
-			fieldset(id='addE')
-				legend Add a new Employee
-				.form-group
-					label(for='email') Email
-					input.form_control(required type='email' id='email' name='email' placeholder='enter an email as your username')
-					.invalid-feedback Enter a valid email address
-				.form-group
-					label(for='pass') Password
-					input.form_control(required type='password' id='pass' name='pass' placeholder='123456')
-					.invalid-feedback Enter a valid password
-					input.btn.btn-primary.btn-block(type="submit", id="sendNewEmployee")
+		container-fluid
+			row.col-md-2.d-none.d-md-block.bg-light.sidebar
+				sidebar-sticky.nav.flex-column
+					nav-item
+						a.nav-link.active(href="/mainMenuAdmin") Dashboard
+					nav-item
+						a.nav-link(href="/addEmployee") Add user
+					nav-item
+						a.nav-link(href="/employees") Manage User
+					nav-item
+						a.nav-link(href="/addAdmin") Add admin
+					nav-item
+						a.nav-link(href="/admins") Manage admin
+					nav-item
+						a.nav-link(href="/") Business analysis
+
+		.container
+			form(action='postNewEmployee', method='post' id='add-user-form')
+				fieldset(id='addE')
+					legend Add a new Employee
+					.form-group
+						label(for='email') Email
+						input.form_control(required type='email' id='email' name='email' placeholder='enter an email as your username')
+						.invalid-feedback Enter a valid email address
+					.form-group
+						label(for='pass') Password
+						input.form_control(required type='password' id='pass' name='pass' placeholder='123456')
+						.invalid-feedback Enter a valid password
+						input.btn.btn-primary.btn-block(type="submit", id="sendNewEmployee")
 
 	script.
 

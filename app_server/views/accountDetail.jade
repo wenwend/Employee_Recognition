@@ -1,0 +1,37 @@
+extends layout
+
+block content
+	.header
+		nav.site_header.sticky-top.py-1
+			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
+				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
+				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+
+	container-fluid
+		row
+			nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+				.sidebar-sticky
+					ul.nav.flex-column
+						li.nav-item
+							a.nav-link.active(href="/mainMenu") Dashboard
+						li.nav-item
+							a.nav-link(href="/accountDetail") Account
+						li.nav-item
+							a.nav-link(href="/newPassEmployee") Update Password
+						li.nav-item
+							a.nav-link(href="/addSignature") Update Signature
+						li.nav-item
+							a.nav-link(href="/addAward") Create Award
+						li.nav-item
+							a.nav-link(href="/awards") Manage Award
+
+			main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
+				.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+					div.h1.h2 Account Information
+					br
+					div.blogtitle #{data.first}
+					br
+					div.blogtitle #{data.name}
+					br
+					div.imagetable
+						img(src=data.signature)

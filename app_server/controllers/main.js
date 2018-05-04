@@ -219,10 +219,164 @@ module.exports.postPassEmployee=function(req,res,next){
 			return next(err);
 		}
 		//res.send(200);
-		//followMail(data.email, "You Changed your password!","/mainMenu");
+		followMail(req.session.email, "You Changed your password!","/mainMenu");
 		res.render('mainMenu',{ name:req.session.email });
 		});
 	} else{
 		res.render('login', {err:"Invalid credentials"});
 	}
+};
+
+//addSignature
+module.exports.addSignature=function(req,res){
+	if(req.session.userId && req.session.userType =='E'){
+		res.render('addSignature',{name:req.session.email});
+	}
+	else{
+	res.render('login',{err:"You must log in as an Employee to access!"});
+	}
+};
+
+//postSignature
+module.exports.postSignature=function(req,res,next){
+	
+	if(req.session.userId && req.session.userType =='E'){
+		const data=req.body;
+		console.log(data.filename);
+		
+		client.query("UPDATE signature SET data =($1) WHERE e_id = ($2);",
+			[data.filename, req.session.userId], function(err,result){
+		if(err){
+			return next(err);
+		}
+		//res.send(200);
+		//followMail(req.session.email, "You Changed your password!","/mainMenu");
+		//console.log(data.filename);
+		res.render('mainMenu',{ name:req.session.email });
+		});
+	}else{
+		res.render('login', {err:"Invalid credentials"});
+	}
+};
+
+//accountDetail
+module.exports.accountDetail = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "E") {
+        client.query('SELECT * FROM employee inner join signature on signature.e_id = employee.id WHERE employee.id=($1);', [req.session.userId], function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            console.log(result.rows[0]);
+            var data ={
+            	email:result.rows[0].username,
+            	first:result.rows[0].first_name,
+            	last:result.rows[0].last_name,
+            	sign:result.rows[0].data,
+            };
+            res.render('accountDetail',{data});
+        });
+    } else {
+        res.render('login', { err: "Invalid credentials" });
+    }
+};
+//awards
+module.exports.awards = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "E") {
+        client.query('SELECT * FROM award inner join employee on award.e_id = employee.id inner join award_type on award_type.id = award.type WHERE employee.id=($1);', [req.session.userId], function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            console.log(result.rows);
+            var awards=[];
+            for(var i =0;i<result.rows.length;i++){
+            	var prettyDate = result.rows[i].given_date.toString().split("00:")[0];
+            	awards[i] ={
+            		type:result.rows[i].name,
+            		receiver:result.rows[i].given_email,
+            		date:result.rows[i].given_date,
+            		sender:result.rows[i].username,
+            		id:req.session.userId
+            	};
+      		}
+            res.render('awards',{awards});
+        });
+    } else {
+        res.render('login', { err: "Invalid credentials" });
+    }
+};
+//awardDetails ?? 
+
+//employees
+module.exports.employees = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "A") {
+        client.query('SELECT * FROM employee;', function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            console.log(result.rows);
+            var employees=[];
+            for(var i =0;i<result.rows.length;i++){
+            	var prettyDate = result.rows[i].create_date.toString().split("00:")[0];
+            	employees[i] ={
+            		first:result.rows[i].first_name,
+            		last:result.rows[i].last_name,
+            		email:result.rows[i].username,
+            		date:result.rows[i].create_date,
+            		id:result.rows[i].id,
+            	};
+      		}
+            res.render('employees',{employees});
+        });
+    } else {
+        res.render('adminLogin', { err: "Invalid credentials" });
+    }
+};
+//deleteEmployee
+module.exports.deleteEmployee = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "A" && req.query.id ) {
+        client.query('DELETE FROM employee where id = ($1);',[req.query.id], function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            res.send(200);
+            //res.render('mainMenuAdmin',{name:req.session.email});
+        });
+    } else {
+        res.render('adminLogin', { err: "Invalid credentials" });
+    }
+};
+//admins
+module.exports.admins = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "A") {
+        client.query('SELECT * FROM admin;', function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            console.log(result.rows);
+            var admins=[];
+            for(var i =0;i<result.rows.length;i++){
+            	admins[i] ={
+            		email:result.rows[i].email,
+            		id:result.rows[i].id,
+            	};
+      		}
+            res.render('admins',{admins});
+        });
+    } else {
+        res.render('adminLogin', { err: "Invalid credentials" });
+    }
+};
+//deleteAdmins
+module.exports.deleteAdmins = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "A" && req.query.id ) {
+        client.query('DELETE FROM admin where id = ($1);',[req.query.id], function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            res.send(200);
+            //res.render('mainMenuAdmin',{name:req.session.email});
+        });
+    } else {
+        res.render('adminLogin', { err: "Invalid credentials" });
+    }
 };

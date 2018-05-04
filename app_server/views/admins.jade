@@ -23,6 +23,15 @@ block content
 					nav-item
 						a.nav-link(href="/") Business analysis
 
-
-	.container
-		h1 Welcome #{name}!
+			main.col-md-9.ml-sm-auto.col-lg-10.px-4
+				h1 Admin List
+				table.table-responsive.table-hover
+					captain
+					thead-light
+					tr.table-primary
+						th.col-sm-3 Email
+						th.col-sm-2 Action
+					for d in admins
+						tr
+							td.col-sm-3= d.email
+							td.col <a href=deleteAdmins?id=#{d.id}>Delete
