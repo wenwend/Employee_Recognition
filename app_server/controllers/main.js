@@ -282,7 +282,7 @@ module.exports.accountDetail = function(req, res, next) {
 //awards
 module.exports.awards = function(req, res, next) {
     if (req.session.userId && req.session.userType == "E") {
-        client.query('SELECT * FROM award inner join employee on award.e_id = employee.id inner join award_type on award_type.id = award.type WHERE employee.id=($1);', [req.session.userId], function(err, result) {
+        client.query('SELECT award.id, award.given_email, award.given_date,award_type.name FROM award inner join employee on award.e_id = employee.id inner join award_type on award_type.id = award.type WHERE employee.id=($1);', [req.session.userId], function(err, result) {
             if (err) {
                 return next(err);
             }
@@ -294,8 +294,8 @@ module.exports.awards = function(req, res, next) {
             		type:result.rows[i].name,
             		receiver:result.rows[i].given_email,
             		date:result.rows[i].given_date,
-            		sender:result.rows[i].username,
-            		id:req.session.userId
+            		sender:req.session.email,
+            		id:result.rows[i].id,
             	};
       		}
             res.render('awards',{awards});
@@ -304,7 +304,20 @@ module.exports.awards = function(req, res, next) {
         res.render('login', { err: "Invalid credentials" });
     }
 };
-//awardDetails ?? 
+//deleteAward
+module.exports.deleteAward = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "E" && req.query.id ) {
+        client.query('DELETE FROM award where id = ($1);',[req.query.id], function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            //res.send(200);
+            res.render('mainMenu',{name:req.session.email});
+        });
+    } else {
+        res.render('lgoin', { err: "Invalid credentials" });
+    }
+};
 
 //employees
 module.exports.employees = function(req, res, next) {
@@ -366,10 +379,27 @@ module.exports.admins = function(req, res, next) {
         res.render('adminLogin', { err: "Invalid credentials" });
     }
 };
+
 //deleteAdmins
 module.exports.deleteAdmins = function(req, res, next) {
     if (req.session.userId && req.session.userType == "A" && req.query.id ) {
         client.query('DELETE FROM admin where id = ($1);',[req.query.id], function(err, result) {
+            if (err) {
+                return next(err);
+            }
+            res.send(200);
+            //res.render('mainMenuAdmin',{name:req.session.email});
+        });
+    } else {
+        res.render('adminLogin', { err: "Invalid credentials" });
+    }
+};
+
+//updateEmployee
+module.exports.updateEmployee = function(req, res, next) {
+    if (req.session.userId && req.session.userType == "A" && req.query.id ) {
+    	const data=req.body;
+        client.query('UPDATE employee SET username =($2) WHERE id = ($1);',[req.query.id,data.email], function(err, result) {
             if (err) {
                 return next(err);
             }

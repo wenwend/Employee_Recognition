@@ -33,11 +33,14 @@ block content
 						th.col-sm-3 Last Name
 						th.col-sm-3 Email
 						th.col-sm-3 Created Time
-						th.col-sm-2 Action
+						th.col-sm-2 Delete
+						th.col-sm-2 Update
+					.tbody
 					for d in employees
 						tr
 							td.col-sm-4= d.first
 							td.col-sm-3= d.last
 							td.col-sm-3= d.email
 							td.col-sm-3= d.date
-							td.col <a href=deleteEmployee?id=#{d.id}>Delete?
+							td.col <a href=deleteEmployee?id=#{d.id}>Delete
+							td.col <a href=updateEmployee?id=#{d.id}>Update

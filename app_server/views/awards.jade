@@ -34,12 +34,12 @@ block content
 						th.col-sm-3 Award Type
 						th.col-sm-3 Award Sender
 						th.col-sm-3 Award Time
-						th.col-sm-2 Details
+						th.col-sm-2 Actions
 					for d in awards
 						tr
 							td.col-sm-4= d.receiver
 							td.col-sm-3= d.type
 							td.col-sm-3= d.sender
 							td.col-sm-3= d.date
-							td.col <a href=awardDetails?id=#{d.id}>Details
+							td.col <a href=deleteAward?id=#{d.id}>Delete
 
