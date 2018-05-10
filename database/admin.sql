@@ -1,0 +1,1 @@
+INSERT INTO admin(id, email, password ,e_id) VALUES(1,’joe@live.com’,’qwerty’,1),(2,’lisa@live.com’,’qwerty’,2),(2,’lisa@live.com’,’qwerty’,3),(3,’jess@live.com’,’qwerty’,4),(4,’peter@live.com’,’qwerty’,5),(5,’hero@live.com’,’qwerty’,6);
