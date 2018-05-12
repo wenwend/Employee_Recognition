@@ -1,0 +1,28 @@
+.mynavbar {
+    background-color: #3B4856;
+    margin: 0 px;
+    padding: 0px;
+    font-size: 24px;
+}
+
+.comp_name {
+    color: #A8E0FF;
+    padding-left: 15px;
+    font-size: 50px
+}
+
+.small_logo {
+    max-height: 100px;
+}
+
+.active-link {
+    color: #61B1F3;
+    padding: 5px;
+}
+
+.inactive-link {
+    color: #9fADBD;
+    background-color: #5E6974;
+    font-size: 26px;
+    padding: 5px;
+}

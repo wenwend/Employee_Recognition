@@ -2,12 +2,16 @@ extends layout
 
 block content
 	.header
-		nav.site_header.sticky-top.py-1
-			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
-				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
-				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+		nav.navbar.navbar-expand-sm.mynavbar.sticky-top.align-content-start
+			.container-fluid.align-self-center.d-sm-flex.flex-sm-column.d-md-flex
+					img.small_logo.px-2.d-none.d-md-block(src="/img/Logo.png")
+					a.comp_name.px-4.d-none.d-md-block(href='/') Recognize
+					a.d-inline-block.inactive-link.px-3(href='/') Home			
+					a.d-inline-block.px-3.active-link(href='/') FAQ
+					a.d-inline-block.ml-auto-md.ml-3-sm.px-3.active-link(href='/login') Login
+					a.d-inline-block.px-3.active-link(href='/adminLogin') Admin
 
-	container-fluid
+	.container-fluid
 		row
 			nav.col-sm-3.col-md-3.d-none.d-md-block.bg-light.sidebar
 				sidebar-sticky

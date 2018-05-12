@@ -2,14 +2,15 @@ extends layout
 
 block content
 	.header
-		nav.site_header.sticky-top.py-1
-			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark
-				a.py-2.d-none.d-md-inline-block(href='/') LOGO
-				a.py-2(href='/') Home
-				a.py-2.d-none.d-md-inline-block(href='/login') LOGIN
-				a.py-2.d-none.d-md-inline-block(href='/adminLogin') Admin
-				a.py-2.d-none.d-md-inline-block(href='/') FAQs
-				
+		nav.navbar.mynavbar.sticky-top
+			.container-fluid
+					img.small_logo.px-2.d-none.d-md-block(src="/img/Logo.png")
+					a.comp_name.px-4.d-none.d-md-block(href='/') Recognize
+					a.d-inline-block.inactive-link.px-3(href='/') Home			
+					a.d-inline-block.px-3.active-link(href='/') FAQ
+					a.d-inline-block.ml-auto-md.ml-3-sm.px-3.active-link(href='/login') Login
+					a.d-inline-block.px-3.active-link(href='/adminLogin') Admin
+
 
 		.position-relative.overflow-hidden.p-3.p-md-5.m-md-3.text-center.bg-light
 			col-md-5.p-lg-5.mx-auto.my-5
@@ -20,7 +21,7 @@ block content
 				a.btn.btn-outline-secondary(href='/login',role='button') Employee LOGIN
 
 		.container
-		h1.display-4.font-weight-normal.text-center Admin tool
+			h1.display-4.font-weight-normal.text-center Admin tool
 			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
 
 				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
@@ -29,11 +30,6 @@ block content
 						p
 							a.btn.btn-outline-secondary(href='/adminLogin',role='button') LOGIN
 
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Contact Admin
-						p
-							a.btn.btn-outline-secondary(href='/adminLogin',role='button') Send Request
 		.container
 			h1.display-4.font-weight-normal.text-center About the Awards
 			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
@@ -50,24 +46,6 @@ block content
 				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
 					my-3.py-3
 						h2.display-5 Special Recognition
-						p.lead You made it!
-
-		.container
-			h1.display-4.font-weight-normal.text-center About the Team
-			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Jon
-						p.lead You made it!
-
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Rachel
-						p.lead You made it!
-
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Sarah
 						p.lead You made it!
 
 		//site footer
