@@ -1,52 +1,48 @@
 extends layout
 
 block content
-	.header
-		nav.navbar.mynavbar.sticky-top
+	.container-fluid.p-0.m-0
+		nav.navbar.mynavbar.sticky-top.px-2
+			.container
+				.d-none.d-md-block.py-2
+					.d-flex.flex-row
+						img.small_logo(src="/img/Logo.png")
+						a.comp_name(href='/') Recognize
+				.d-sm-flex.flex-sm-row.d-block.col.py-2.text-sm-left.text-center.pr-0
+					.col.d-sm-flex.flex-sm-row.d-block.w-100.justify-content-start
+						a.d-sm-flex.flex-sm-row.d-block.inactive-link(href='/') Home			
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/') FAQ
+					.col.w-100
+					.col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/login') Login
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/adminLogin') Admin
+
+		.container.overflow-hidden.image-div.px-5.py-5.text-center.overflow-hidden
 			.container-fluid
-					img.small_logo.px-2.d-none.d-md-block(src="/img/Logo.png")
-					a.comp_name.px-4.d-none.d-md-block(href='/') Recognize
-					a.d-inline-block.inactive-link.px-3(href='/') Home			
-					a.d-inline-block.px-3.active-link(href='/') FAQ
-					a.d-inline-block.ml-auto-md.ml-3-sm.px-3.active-link(href='/login') Login
-					a.d-inline-block.px-3.active-link(href='/adminLogin') Admin
-
-
-		.position-relative.overflow-hidden.p-3.p-md-5.m-md-3.text-center.bg-light
-			col-md-5.p-lg-5.mx-auto.my-5
-				h1.display-4.font-weight-normal Employee Reward Program
-			p Welcome to #{title}!
-			p I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel. —Maya Angelou
-			p
-				a.btn.btn-outline-secondary(href='/login',role='button') Employee LOGIN
-
-		.container
-			h1.display-4.font-weight-normal.text-center Admin tool
-			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
-
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Admin LOGIN
-						p
-							a.btn.btn-outline-secondary(href='/adminLogin',role='button') LOGIN
-
-		.container
-			h1.display-4.font-weight-normal.text-center About the Awards
-			.d-md-flex.flex-md-equal.w-100.my-md-3.pl-md-3
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Employee of Month/Quarter
-						p.lead You made it!
-
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Employee of the Year
-						p.lead You made it!
-
-				bg-light.mr-md-3.pt-3.px-3.pt-md-5.px-md-5.text-center.overflow-hidden
-					my-3.py-3
-						h2.display-5 Special Recognition
-						p.lead You made it!
+				.row
+					h1.w-100.d-none.d-md-block.myheader.display-2.font-weight-bold.flex-wrap Recognize
+					h1.secondaryheader.w-100.text-center.font-weight-italic Employee Recognition Made Simple
+					p.thirdheader Recognize is an employee recongition program which easily allows you to award your employees for all their hard work while saving you time in the process!
+				.row.justify-content-center.homebuttons
+					.col-md-4.justify-content-center
+						a.btn.btn-outline-secondary(href='/',role='button') Sign Up
+					.col-md-4.justify-content-center
+						a.btn.btn-outline-secondary(href='/login',role='button') Login
+					.col-md-4.justify-content-center
+						a.btn.btn-outline-secondary(href='/login',role='button') Admin
+		.container.w-100.mycontainer
+			.row.w-100.justify-content-center.my-2.mx-auto.text-center
+				h1.w-100.myheader.font-weight-bold.flex-wrap Types of Awards
+			.row.w-100.h-100.justify-content-center.my-2.mx-auto.text-center.p-2.text-center
+				.col-md-4
+					.home1.d-flex.align-items-center.h-auto.px-2.mx-auto
+						h4.awardtypes.w-90 Employee of the Month
+				.col-md-4 
+					.home2.d-flex.align-items-center.h-auto.px-2.mx-auto
+						h4.awardtypes.w-90 Employee of the Year
+				.col-md-4  
+					.home3.d-flex.align-items-center.h-auto.px-2.mx-auto  
+						h4.awardtypes.w-90 Special Recognition Award
 
 		//site footer
 		hr.my-4
