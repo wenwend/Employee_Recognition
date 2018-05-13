@@ -3,6 +3,6 @@ var router = express.Router();
 var ctrlMain = require('../controllers/main');
 
 /* GET login page */
-router.post('/', ctrlMain.deleteEmployee);
+router.get('/', ctrlMain.deleteEmployee);
 
 module.exports = router;

@@ -1,0 +1,87 @@
+extends layout
+
+block content
+	.container-fluid.p-0.m-0
+		nav.navbar.mynavbar.sticky-top.px-2
+			.container
+				.d-none.d-md-block.py-2
+					.d-flex.flex-row
+						img.small_logo(src="/img/Logo.png")
+						a.comp_name(href='/') Recognize
+				.d-sm-flex.flex-sm-row.d-block.col.py-2.text-sm-left.text-center.pr-0
+					.col.d-sm-flex.flex-sm-row.d-block.w-100.justify-content-start		
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='mailto:lynx.no.reploy@gmail.com') Contact us
+					.col.w-100
+					.col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/login') Employee Portal
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/adminLogin') Admin Portal
+
+	.container.w-100
+			ul
+				h1.w-100.myheader.font-weight-bold About the Team
+			.row.w-100.h-100.justify-content-center.my-2.mx-auto.text-center.p-2.text-center
+				.col-md-4
+					h4.w-90 Sarah
+				.col-md-4 	
+					h4.w-90 Jon
+				.col-md-4  
+					h4.w-90 Rachel
+			.row.w-100.h-100.justify-content-center.my-2.mx-auto.text-center.p-2.text-center
+				.col-md-4
+					p Data Expert
+				.col-md-4
+					p Latex/Test Expert
+				.col-md-4
+					p Proficient with NodeJS. 
+
+			ul#categories
+				li.category
+					h5.w-100 How to set up account
+					ul.chevron.list
+						li.article If you do not have account, you can sign up or go to Contact Us above.
+						li.article If you are an administrator, please log in via admin portal.
+						li.article If you are an employee, please log in via employee portal above.
+
+			ul#categories
+				li.category
+					h5.w-100 How to publish award
+					ul.chevron.list
+						li.article A
+						li.article B
+						li.article C
+
+			ul#categories
+				li.category
+					h5.w-100 How to change signature
+					ul.chevron.list
+						li.article A
+						li.article B
+						li.article C
+			ul#categories
+				li.category
+					h5.w-100 How to manage employee
+					ul.chevron.list
+						li.article A
+						li.article B
+						li.article C
+			ul#categories
+				li.category
+					h5.w-100 How to manage admins
+					ul.chevron.list
+						li.article A
+						li.article B
+						li.article C
+			ul#categories
+				li.category
+					h5.w-100 How to query for business insight
+					ul.chevron.list
+						li.article A
+						li.article B
+						li.article C
+
+
+
+	//site footer
+	hr.my-4
+	footer.footer
+		p © Software Capstone I | Group Lynx | <a href="https://github.com/wenwend/Employee_Recognition">Source

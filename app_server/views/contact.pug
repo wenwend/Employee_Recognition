@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+	if err
+		.alert.alert-danger.aler-dismissable.fade.show(role="alert") #{err}
+			button.close(type="button" data-dismiss="alert" aria-label="close")
+				span(aria-hidden="true") &times;
+				
+	.container.text-center
+		form(action='/postContact',method='post')
+			h1.h3.mb-3.font-weight-normal Contact Us Form
+				
+			input.form-control(required type="email", name="email" id="email" placeholder="jon@gmail.com" autofocus)
+				
+			input.form-control(required type="text", name="subject" id="subject" placeholder="Subject")
+
+			input.form-control(required type="text", name="content" id="content" placeholder="Your content here")
+				
+			input.btn.btn-primary.btn-block(type="submit", id="contact")
+
+		p.mt-5.mb-3.text-muted &copy; 2018

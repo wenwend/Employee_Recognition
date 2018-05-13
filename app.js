@@ -10,6 +10,9 @@ var pug = require('pug');
 
 //route 
 var index = require('./app_server/routes/index');
+var faq = require('./app_server/routes/faq');
+var contact = require('./app_server/routes/contact');
+var postContact = require('./app_server/routes/postContact');
 var login = require('./app_server/routes/login');
 var postLogin = require('./app_server/routes/postLogin');
 var adminLogin = require('./app_server/routes/adminLogin');
@@ -54,7 +57,10 @@ app.use(session({ secret: 'keyboard car', cookie: { maxAge: 60000 } }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/faq',faq);
 app.use('/login', login);
+app.use('/contact',contact);
+app.use('/postContact',postContact);
 app.use('/adminLogin', adminLogin);
 app.use('/postLogin', postLogin);
 app.use('/postLoginAdmin', postLoginAdmin);

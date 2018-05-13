@@ -4,6 +4,6 @@ var router = express.Router();
 var ctrlMain = require('../controllers/main');
 
 /* GET login page */
-router.post('/', ctrlMain.deleteAdmins);
+router.get('/', ctrlMain.deleteAdmins);
 
 module.exports = router;

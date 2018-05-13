@@ -22,16 +22,15 @@ var client = new Client({
 
 client.connect();
 
-function followMail(e_mail,s_ubject,url){
-
-
+function followMail(e_mail,s_ubject,url,content=''){
+	
 	url="https://pacific-thicket-81385.herokuapp.com"+url;
  	
 	const mailOptions = {
-	from: 'lynx.no.reply@gmail.com', // sender address
+	from: 'lynx.no.reploy@gmail.com', // sender address
 	to: e_mail, // list of receivers
  	subject: s_ubject, // Subject line
- 	text: url // plain text body
+ 	html: url+'<br>'+ content
 };
 
 transporter.sendMail(mailOptions, function (err, info) {
@@ -47,10 +46,24 @@ module.exports.index = function(req,res){
 	res.render('index',{ title: 'Employee Recognition HOME PAGE'});
 };
 
+module.exports.faq = function(req,res){
+	//res.render('index',{err:"something went terribly wrong!"});
+	res.render('faq',{ title: 'FAQ Page'});
+};
+
 module.exports.login=function(req,res){
 	res.render('login');
 };
 
+module.exports.contact=function(req,res){
+	res.render('contact');
+};
+module.exports.postContact = function(req,res){
+	const mail =req.body;
+	var content = 'From:' + mail.email +'Content:'+mail.content; 
+	followMail("lynx.no.reploy@gmail.com",mail.subject,'',content);
+	res.render('index',{ title: 'Home Page'});
+};
 
 module.exports.adminLogin=function(req,res){
 	res.render('adminLogin');
@@ -87,7 +100,7 @@ module.exports.postLoginAdmin=function(req,res,next){
 			req.session.userType='A';
 			res.redirect('mainMenuAdmin');
 		} else{
-			res.render('adminLogin',{err:"Invalid credentials"});
+			res.render('adminLogin',{err:"Admin: Invalid credentials"});
 		}
 	});
 };
@@ -307,7 +320,7 @@ module.exports.awards = function(req, res, next) {
 //deleteAward
 module.exports.deleteAward = function(req, res, next) {
     if (req.session.userId && req.session.userType == "E" && req.query.id ) {
-        client.query('DELETE FROM award where id = ($1);',[req.query.id], function(err, result) {
+        client.query('DELETE FROM award where id = $1;',[req.query.id], function(err, result) {
             if (err) {
                 return next(err);
             }
@@ -347,12 +360,12 @@ module.exports.employees = function(req, res, next) {
 //deleteEmployee
 module.exports.deleteEmployee = function(req, res, next) {
     if (req.session.userId && req.session.userType == "A" && req.query.id ) {
-        client.query('DELETE FROM employee where id = ($1);',[req.query.id], function(err, result) {
+        client.query('DELETE FROM employee where id = $1;',[req.query.id], function(err, result) {
             if (err) {
                 return next(err);
             }
-            res.send(200);
-            //res.render('mainMenuAdmin',{name:req.session.email});
+            //res.send(200);
+            res.render('mainMenuAdmin',{name:req.session.email});
         });
     } else {
         res.render('adminLogin', { err: "Invalid credentials" });
@@ -383,12 +396,12 @@ module.exports.admins = function(req, res, next) {
 //deleteAdmins
 module.exports.deleteAdmins = function(req, res, next) {
     if (req.session.userId && req.session.userType == "A" && req.query.id ) {
-        client.query('DELETE FROM admin where id = ($1);',[req.query.id], function(err, result) {
+        client.query('DELETE FROM admin where id = $1;',[req.query.id], function(err, result) {
             if (err) {
                 return next(err);
             }
-            res.send(200);
-            //res.render('mainMenuAdmin',{name:req.session.email});
+            //res.send(200);
+            res.render('mainMenuAdmin',{name:req.session.email});
         });
     } else {
         res.render('adminLogin', { err: "Invalid credentials" });
