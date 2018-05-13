@@ -1,11 +1,21 @@
 extends layout
 
 block content
-	.header
-		nav.site_header.sticky-top.py-1
-			container.d-flex.flex-column.flex-md-row.justify-content-between.bg-dark			
-				a.navbar-brand.col-sm-3.col-md-2.mr-0(href="/") LOGO
-				a.navbar-nav.text-nowrap.nav-link(href="/") Sign Out
+	.container-fluid.p-0.m-0
+		nav.navbar.mynavbar.sticky-top.px-2
+			.container
+				.d-none.d-md-block.py-2
+					.d-flex.flex-row
+						img.small_logo(src="/img/Logo.png")
+						a.comp_name(href='/') Recognize
+				.d-sm-flex.flex-sm-row.d-block.col.py-2.text-sm-left.text-center.pr-0
+					.col.d-sm-flex.flex-sm-row.d-block.w-100.justify-content-start
+						a.d-sm-flex.flex-sm-row.d-block.inactive-link(href='/') Home			
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/') FAQ
+					.col.w-100
+					.col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/') Sign Out
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/adminLogin') Login as Admin?
 
 	container-fluid
 		row
@@ -64,6 +74,29 @@ block content
 		document.addEventListener("DOMContentLoaded", function(event) {
 			addCanvas();
 		});
+
+		
+		document.getElementById("inp").addEventListener('change',readFile);
+		document.getElementById("uploadSignature").addEventListener('submit',function(){
+			
+			console.log(document.getElementById("b64").value);
+
+		}, false);
+
+		function readFile(){
+
+			if (this.files && this.files[0]) {
+				var FR= new FileReader();
+
+				FR.addEventListener("load", function(e) {
+				document.getElementById("img").src = e.target.result;
+				document.getElementById("b64").value = e.target.result;
+			}); 
+	
+				FR.readAsDataURL( this.files[0] );
+			}
+
+		}
 
 		function addCanvas(){
 			var canvas = document.getElementById("signature");

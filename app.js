@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var pug = require('pug');
 
 
 //route 
@@ -21,8 +22,8 @@ var addEmployee = require('./app_server/routes/addEmployee');
 var postNewEmployee = require('./app_server/routes/postNewEmployee');
 var postNewAdmin = require('./app_server/routes/postNewAdmin');
 var postNewAward = require('./app_server/routes/postNewAward');
-var newPassEmployee =require('./app_server/routes/newPassEmployee');
-var postPassEmployee =require('./app_server/routes/postPassEmployee');
+var newPassEmployee = require('./app_server/routes/newPassEmployee');
+var postPassEmployee = require('./app_server/routes/postPassEmployee');
 var addSignature = require('./app_server/routes/addSignature');
 var postSignature = require('./app_server/routes/postSignature');
 var accountDetail = require('./app_server/routes/accountDetail');
@@ -36,8 +37,9 @@ var deleteAward = require('./app_server/routes/deleteAward');
 var app = express();
 
 //view engine setup
-app.set('views',path.join(__dirname, 'app_server', 'views'));
-app.set('view engine','jade');
+app.set('views', path.join(__dirname, 'app_server', 'views'));
+app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, 'app_server/public')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -52,29 +54,29 @@ app.use(session({ secret: 'keyboard car', cookie: { maxAge: 60000 } }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/login',login);
-app.use('/adminLogin',adminLogin);
-app.use('/postLogin',postLogin);
-app.use('/postLoginAdmin',postLoginAdmin);
-app.use('/mainMenu',mainMenu);
-app.use('/mainMenuAdmin',mainMenuAdmin);
-app.use('/addAdmin',addAdmin);
-app.use('/addAward',addAward);
-app.use('/addEmployee',addEmployee);
-app.use('/postNewEmployee',postNewEmployee);
-app.use('/postNewAdmin',postNewAdmin);
-app.use('/postNewAward',postNewAward);
-app.use('/newPassEmployee',newPassEmployee);
-app.use('/postPassEmployee',postPassEmployee);
-app.use('/addSignature',addSignature);
-app.use('/postSignature',postSignature);
-app.use('/accountDetail',accountDetail);
-app.use('/awards',awards);
-app.use('/employees',employees);
-app.use('/deleteEmployee',deleteEmployee);
-app.use('/deleteAdmins',deleteAdmins);
-app.use('/admins',admins);
-app.use('/deleteAward',deleteAward);
+app.use('/login', login);
+app.use('/adminLogin', adminLogin);
+app.use('/postLogin', postLogin);
+app.use('/postLoginAdmin', postLoginAdmin);
+app.use('/mainMenu', mainMenu);
+app.use('/mainMenuAdmin', mainMenuAdmin);
+app.use('/addAdmin', addAdmin);
+app.use('/addAward', addAward);
+app.use('/addEmployee', addEmployee);
+app.use('/postNewEmployee', postNewEmployee);
+app.use('/postNewAdmin', postNewAdmin);
+app.use('/postNewAward', postNewAward);
+app.use('/newPassEmployee', newPassEmployee);
+app.use('/postPassEmployee', postPassEmployee);
+app.use('/addSignature', addSignature);
+app.use('/postSignature', postSignature);
+app.use('/accountDetail', accountDetail);
+app.use('/awards', awards);
+app.use('/employees', employees);
+app.use('/deleteEmployee', deleteEmployee);
+app.use('/deleteAdmins', deleteAdmins);
+app.use('/admins', admins);
+app.use('/deleteAward', deleteAward);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
