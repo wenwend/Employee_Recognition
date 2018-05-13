@@ -53,13 +53,13 @@ block content
 						button#undoButton Undo
 						form(action='postSignature', method='post' id='add-signature')
 							input.form_control(type='hidden' id='filename' name ='filename')
+							br
 							input.btn.btn-primary.btn-block(type="submit", id="sendSignature")
+						br
+						br
 
 
 	script.
-		
-		
-
 
 		document.addEventListener("DOMContentLoaded", function(event) {
 			addCanvas();
@@ -82,8 +82,7 @@ block content
 				document.getElementsByName("filename")[0].setAttribute("value", fileData);
 				console.log(document.getElementById("filename").value);
 				}
-			
-			}, false);
+			});
 			
 			//clear the canvas
 			clearButton.addEventListener("click", function (event) {
@@ -98,26 +97,4 @@ block content
 				signaturePad.fromData(data);
 				}
 			});
-		}
-		
-		document.getElementById("inp").addEventListener('change',readFile);
-		document.getElementById("uploadSignature").addEventListener('submit',function(){
-			
-			console.log(document.getElementById("b64").value);
-
-		}, false);
-
-		function readFile(){
-
-			if (this.files && this.files[0]) {
-				var FR= new FileReader();
-
-				FR.addEventListener("load", function(e) {
-				document.getElementById("img").src = e.target.result;
-				document.getElementById("b64").value = e.target.result;
-			}); 
-	
-				FR.readAsDataURL( this.files[0] );
-			}
-
 		}
