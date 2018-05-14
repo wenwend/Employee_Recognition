@@ -51,6 +51,17 @@ module.exports.faq = function(req,res){
 	res.render('faq',{ title: 'FAQ Page'});
 };
 
+//logout
+module.exports.logout=function(req,res,next){
+	if(req.session)
+		req.session.destroy(function(err){
+			if(err)
+				return next(err);
+			else
+				res.redirect('/');
+	})
+};
+
 module.exports.login=function(req,res){
 	res.render('login');
 };
@@ -335,7 +346,7 @@ module.exports.deleteAward = function(req, res, next) {
 //employees
 module.exports.employees = function(req, res, next) {
     if (req.session.userId && req.session.userType == "A") {
-        client.query('SELECT * FROM employee;', function(err, result) {
+        client.query('SELECT * FROM employee where id NOT IN ($1);',[req.session.userId], function(err, result) {
             if (err) {
                 return next(err);
             }
@@ -374,7 +385,7 @@ module.exports.deleteEmployee = function(req, res, next) {
 //admins
 module.exports.admins = function(req, res, next) {
     if (req.session.userId && req.session.userType == "A") {
-        client.query('SELECT * FROM admin;', function(err, result) {
+        client.query('SELECT * FROM admin where id NOT IN ($1);',[req.session.userId], function(err, result) {
             if (err) {
                 return next(err);
             }

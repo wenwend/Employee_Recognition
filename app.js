@@ -14,6 +14,7 @@ var faq = require('./app_server/routes/faq');
 var contact = require('./app_server/routes/contact');
 var postContact = require('./app_server/routes/postContact');
 var login = require('./app_server/routes/login');
+var logout = require('./app_server/routes/logout');
 var postLogin = require('./app_server/routes/postLogin');
 var adminLogin = require('./app_server/routes/adminLogin');
 var postLoginAdmin = require('./app_server/routes/postLoginAdmin');
@@ -59,6 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/faq',faq);
 app.use('/login', login);
+app.use('/logout',logout);
 app.use('/contact',contact);
 app.use('/postContact',postContact);
 app.use('/adminLogin', adminLogin);
@@ -83,6 +85,7 @@ app.use('/deleteEmployee', deleteEmployee);
 app.use('/deleteAdmins', deleteAdmins);
 app.use('/admins', admins);
 app.use('/deleteAward', deleteAward);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
