@@ -372,9 +372,9 @@ module.exports.employees = function(req, res, next) {
 module.exports.editEmployee = function(req, res, next) {
 	console.log(req.body);
 	res.render('mainMenuAdmin',{name:req.session.email});
-    /*if (req.session.userId && req.session.userType == "A" && req.body.editRowId) {
+    if (req.session.userId && req.session.userType == "A" && req.body.editRowId) {
     	const data=req.body;
-        client.query('UPDATE employee SET first_name = $2,last_name= $3, username = $4 WHERE id = $1;',[data.editRowId, data.editFirst,data.editLast,data.editEmail], function(err, result) {
+        client.query('UPDATE employee SET first_name = $2,last_name= $3, username = $4 WHERE id = $1;',[data.id, data.fname,data.lname,data.uname], function(err, result) {
             if (err) {
                 return next(err);
             }
@@ -382,7 +382,7 @@ module.exports.editEmployee = function(req, res, next) {
         });
     } else {
         res.render('adminLogin', { err: "Invalid credentials" });
-    }*/
+    }
 };
 //deleteEmployee
 module.exports.deleteEmployee = function(req, res, next) {
