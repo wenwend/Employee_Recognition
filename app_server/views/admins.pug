@@ -40,10 +40,59 @@ block content
 					thead-light
 					tr.table-primary
 						th.col-sm-3 Email
-						th.col-sm-2 Action
+						th.col-sm-2 Delete
+						th.col-sm-2 Update
 					for d in admins
 						tr
 							td.col-sm-3= d.email
 							td.col <a href=deleteAdmins?id=#{d.id}>Delete
-
+							td.col 
+								button(id=d.id.toString() onclick=`showEdit(${JSON.stringify(d)})`) Edit
+			.container.center.col-md-9.ml-sm-auto.col-lg-10.px-4
+				form#editFormAdmin
+					fieldset(id='editA')
+						legend Edit Entry
+						.form-group
+							input#editRowId.form_control(type='hidden',name="editRowId")
+						.form-group
+							label(for='editEmail') Email
+							input#editEmail.form_control(required type='email')
+							.invalid-feedback Enter a valid email address
+							button#editRowSave.btn.btn-primary.btn-block(type='button' onClick='saveEditA()' ) Save
 			p.mt-5.mb-3.text-muted &copy; 2018
+
+	script.
+		document.addEventListener("DOMContentLoaded", function(event) {
+			document.getElementById('editFormAdmin').style.visibility='hidden';
+			
+		});
+
+		function showEdit(data){
+
+			document.getElementById('editFormAdmin').style.visibility='visible';
+			console.log(data);
+			var iid=document.getElementById('editRowId');
+			iid.value=data.id;
+			var name=document.getElementById('editEmail');
+			name.value=data.email;
+		}
+
+		function saveEditA(){
+				console.log('saving');
+				var payload={};
+				payload.id=document.getElementById('editRowId').value;
+				payload.uname=document.getElementById('editEmail').value;
+				console.log(payload);
+				var req= new XMLHttpRequest();
+				
+				req.onreadystatechange=function() {
+					if (req.readyState == XMLHttpRequest.DONE){
+						alert("Submitted! Please Refresh!");
+
+					}
+				}
+				req.open('post','http://localhost:5000/editAdmins',true);
+				req.setRequestHeader('Content-Type','application/json');
+				req.send(JSON.stringify(payload));
+		
+		}

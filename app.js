@@ -38,6 +38,7 @@ var admins = require('./app_server/routes/admins');
 var deleteAdmins = require('./app_server/routes/deleteAdmins');
 var deleteAward = require('./app_server/routes/deleteAward');
 var editEmployee = require('./app_server/routes/editEmployee');
+var editAdmins = require('./app_server/routes/editAdmins');
 
 var app = express();
 
@@ -87,6 +88,7 @@ app.use('/deleteAdmins', deleteAdmins);
 app.use('/admins', admins);
 app.use('/deleteAward', deleteAward);
 app.use('/editEmployee',editEmployee);
+app.use('/editAdmins',editAdmins);
 
 
 // catch 404 and forward to error handler
