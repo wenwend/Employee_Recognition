@@ -72,7 +72,7 @@ block content
 							label(for='editEmail') Email
 							input#editEmail.form_control(required type='email')
 							.invalid-feedback Enter a valid email address
-							input#editRowSave.btn.btn-primary.btn-block(type='submit', value='Save')
+							button#editRowSave.btn.btn-primary.btn-block(type='button' onClick='saveEdit()' ) Save
 
 				p.mt-5.mb-3.text-muted &copy; 2018
 
@@ -86,18 +86,20 @@ block content
 
 			document.getElementById('editForm').style.visibility='visible';
 			console.log(data);
-			
+			var iid=document.getElementById('editRowId');
+			iid.value=data.id;
 			var first=document.getElementById('editFirst');
 			first.value=data.first;
 			var last=document.getElementById('editLast');
 			last.value=data.last;
 			var name=document.getElementById('editEmail');
 			name.value=data.email;
-			
-			
-			document.getElementById('editRowSave').addEventListener('submit',function(event){
+		}
+
+		function saveEdit(){
+				console.log('saving');
 				var payload={};
-				payload.id=data.id;
+				payload.id=document.getElementById('editRowId').value;
 				payload.fname=document.getElementById('editFirst').value;
 				payload.lname=document.getElementById('editLast').value;
 				payload.uname=document.getElementById('editEmail').value;
@@ -112,13 +114,6 @@ block content
 						console.log("error..."+req.statusText);
 				})
 				req.send(JSON.stringify(payload));
-				event.preventDefault();
-
-
-			})
-
-			
-		}
 		
-		
+		}		
 		
