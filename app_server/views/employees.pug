@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	.container-fluid.p-0.m-0
+	container-fluid.p-0.m-0
 		nav.navbar.mynavbar.sticky-top.px-2
 			.container
 				.d-none.d-md-block.py-2
@@ -35,24 +35,90 @@ block content
 
 			main.col-md-9.ml-sm-auto.col-lg-10.px-4
 				h1 Employee List
-				table.table-responsive.table-hover
+				table#users.table.table-bordered.table-condensed
 					captain
 					thead-light
-					tr.table-primary
-						th.col-sm-4 First Name
-						th.col-sm-3 Last Name
-						th.col-sm-3 Email
-						th.col-sm-3 Created Time
-						th.col-sm-2 Delete
-						th.col-sm-2 Update
+						tr.table-primary
+							th.col-sm-4 First Name
+							th.col-sm-3 Last Name
+							th.col-sm-3 Email
+							th.col-sm-3 Created Time
+							th.col-sm-2 Delete
+							th.col-sm-2 Update
 					.tbody
 					for d in employees
 						tr
-							td.col-sm-4= d.first
-							td.col-sm-3= d.last
-							td.col-sm-3= d.email
-							td.col-sm-3= d.date
+							td.col-sm-4=d.first
+							td.col-sm-3=d.last
+							td.col-sm-3=d.email
+							td.col-sm-3=d.date
 							td.col <a href=deleteEmployee?id=#{d.id}>Delete
-							td.col <a href=updateEmployee?id=#{d.id}>Update
+							td.col 
+								button(id=d.id.toString() onclick=`showEdit(${JSON.stringify(d)})`) Edit
 
-			p.mt-5.mb-3.text-muted &copy; 2018
+			.container.center.col-md-9.ml-sm-auto.col-lg-10.px-4
+				form(id='editForm')
+					fieldset(id='editE')
+						legend Edit Entry
+						.form-group
+							input#editRowId.form_control(type='hidden',name="editRowId")
+						.form-group
+							label(for='editFirst') First Name
+							input#editFirst.form_control(required type='text')
+						.form-group
+							label(for='editLast') Last Name
+							input#editLast.form_control(required type='text')
+						.form-group
+							label(for='editEmail') Email
+							input#editEmail.form_control(required type='email')
+							.invalid-feedback Enter a valid email address
+							input#editRowSave.btn.btn-primary.btn-block(type='submit', value='Save')
+
+				p.mt-5.mb-3.text-muted &copy; 2018
+
+	script.
+		document.addEventListener("DOMContentLoaded", function(event) {
+			document.getElementById('editForm').style.visibility='hidden';
+			
+		});
+
+		function showEdit(data){
+
+			document.getElementById('editForm').style.visibility='visible';
+			console.log(data);
+			
+			var first=document.getElementById('editFirst');
+			first.value=data.first;
+			var last=document.getElementById('editLast');
+			last.value=data.last;
+			var name=document.getElementById('editEmail');
+			name.value=data.email;
+			
+			
+			document.getElementById('editRowSave').addEventListener('submit',function(event){
+				var payload={};
+				payload.id=data.id;
+				payload.fname=document.getElementById('editFirst').value;
+				payload.lname=document.getElementById('editLast').value;
+				payload.uname=document.getElementById('editEmail').value;
+				console.log(payload);
+				var req= new XMLHttpRequest();
+				req.open('post','https://pacific-thicket-81385.herokuapp.com/editEmployee',true);
+				req.setRequestHeader('Content-Type','application/json');
+				req.addEventListener('load',function(){
+					if(req.status>=200 && req.status<400)
+						alert("Successfully updated!");
+					else
+						console.log("error..."+req.statusText);
+				})
+				req.send(JSON.stringify(payload));
+				event.preventDefault();
+
+
+			})
+
+			
+		}
+		
+		
+		
