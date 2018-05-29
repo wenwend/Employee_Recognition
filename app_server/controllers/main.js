@@ -372,13 +372,14 @@ module.exports.employees = function(req, res, next) {
 module.exports.editEmployee = function(req, res, next) {
 	console.log(req.body);
 	res.render('mainMenuAdmin',{name:req.session.email});
-    if (req.session.userId && req.session.userType == "A" && req.body.editRowId) {
+    if (req.session.userId && req.session.userType == "A" && req.body.id) {
     	const data=req.body;
         client.query('UPDATE employee SET first_name = $2,last_name= $3, username = $4 WHERE id = $1;',[data.id, data.fname,data.lname,data.uname], function(err, result) {
             if (err) {
                 return next(err);
             }
-            res.render('mainMenuAdmin',{name:req.session.email});
+            //return res.send(200);
+            //res.render('mainMenuAdmin',{name:req.session.email});
         });
     } else {
         res.render('adminLogin', { err: "Invalid credentials" });
