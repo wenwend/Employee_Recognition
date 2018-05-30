@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
-        "postinstall": "chmod +x bashscript.sh"
+        //"postinstall": "chmod +x bashscript.sh"
     },
     "engines": {
         "node": "8.9.1",
