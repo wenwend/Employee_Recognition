@@ -60,10 +60,10 @@ block content
 						br
 						button#clearButton Clear
 						button#undoButton Undo
-						form(action='postSignature', method='post' id='add-signature')
+						form#add-signature
 							input.form_control(type='hidden' id='filename' name ='filename')
 							br
-							input.btn.btn-primary.btn-block(type="submit", id="sendSignature")
+							button#sendSignature.btn.btn-primary.btn-block(type='button' onClick='saveSign()') Save
 						br
 						br
 
@@ -104,17 +104,10 @@ block content
 				backgroundColor: 'rgb(255, 255, 255)'
 			});
 			
-			//attach value to hidden input 
-			form.addEventListener('submit', function(event) {
-			if (signaturePad.isEmpty() === true) {
-				event.preventDefault();
-				event.stopPropagation();
-			}else{
-				var fileData = signaturePad.toDataURL(); //pvg file in URI
-				document.getElementsByName("filename")[0].setAttribute("value", fileData);
-				console.log(document.getElementById("filename").value);
-				}
-			});
+			var fileData = signaturePad.toDataURL(); //pvg file in URI
+			document.getElementsByName("filename")[0].setAttribute("value", fileData);
+
+			console.log(document.getElementById("filename").value);
 			
 			//clear the canvas
 			clearButton.addEventListener("click", function (event) {
@@ -129,4 +122,26 @@ block content
 				signaturePad.fromData(data);
 				}
 			});
+		}
+
+		function saveSign(id){
+			console.log('saving');
+			var payload={};
+			
+			payload.file=document.getElementById("filename").value
+				
+			console.log(payload);
+			
+				var req= new XMLHttpRequest();
+				
+				req.onreadystatechange=function() {
+					if (req.readyState == XMLHttpRequest.DONE){
+						alert("Submitted! Please Refresh!");
+
+					}
+				}
+				req.open('post','http://localhost:5000/postSignature',true);
+				req.setRequestHeader('Content-Type','application/json');
+				req.send(JSON.stringify(payload));
+			
 		}

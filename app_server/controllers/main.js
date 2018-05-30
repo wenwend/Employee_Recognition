@@ -266,20 +266,22 @@ module.exports.postSignature=function(req,res,next){
 	
 	if(req.session.userId && req.session.userType =='E'){
 		const data=req.body;
-		console.log(data.filename);
+		console.log(data.file);
+		
 		
 		client.query("UPDATE signature SET data =($1) WHERE e_id = ($2);",
 			[data.filename, req.session.userId], function(err,result){
 		if(err){
 			return next(err);
 		}
-		//res.send(200);
-		//followMail(req.session.email, "You Changed your password!","/mainMenu");
-		//console.log(data.filename);
+		
+		followMail(req.session.email, "You Changed your Signature!","/mainMenu");
+		
 		res.render('mainMenu',{ name:req.session.email });
 		});
 	}else{
 		res.render('login', {err:"Invalid credentials"});
+		
 	}
 };
 

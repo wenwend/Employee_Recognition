@@ -1,10 +1,10 @@
 CREATE SEQUENCE signature_id_seq;
-CREATE TABLE signature(id int primary key nextval(‘signature_id_seq'), data TEXT,e_id int references employee(id));
+CREATE TABLE signature(id int primary key nextval(‘signature_id_seq'), data TEXT);
 alter SEQUENCE signature_id_seq owned by signature.id; // to make a serial for employee id see note 1
 
 
 CREATE SEQUENCE employee_id_seq;
-CREATE TABLE employee( id int primary key not null DEFAULT nextval(‘employee_id_seq'), username varchar(254) not null, password varchar(254) not null, first_name varchar(20), last_name varchar(20), create_date date SET DEFAULT CURRENT_DATE, admin_id int references admin(id) null);
+CREATE TABLE employee( id int primary key not null DEFAULT nextval(‘employee_id_seq'), username varchar(254) not null, password varchar(254) not null, first_name varchar(20), last_name varchar(20), create_date date SET DEFAULT CURRENT_DATE, s_id int UNIQUE references signature(id), admin_id int references admin(id) null);
 alter SEQUENCE employee_id_seq owned by employee.id; // to make a serial for employee id see note 1
 
 CREATE SEQUENCE admin_id_seq;
