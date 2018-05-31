@@ -372,17 +372,17 @@ module.exports.employees = function(req, res, next) {
 
 module.exports.editEmployee = function(req, res, next) {
 	console.log(req.body);
-    if (req.session.userId && req.session.userType == "A" && req.body.id) {
+    if (req.session.userId && req.body.id) {
     	const data=req.body;
         client.query('UPDATE employee SET first_name = $2,last_name= $3, username = $4 WHERE id = $1;',[data.id, data.fname,data.lname,data.uname], function(err, result) {
             if (err) {
                 return next(err);
             }
-            //res.send(200);
-            res.render('mainMenuAdmin',{name:req.session.email});
+            res.send(200);
+	        //res.render('mainMenu',{name:req.session.email});
         });
     } else {
-        res.render('adminLogin', { err: "Invalid credentials" });
+        res.render('index',{ title: 'Employee Recognition HOME PAGE'});
     }
 };
 //deleteEmployee
@@ -392,7 +392,7 @@ module.exports.deleteEmployee = function(req, res, next) {
             if (err) {
                 return next(err);
             }
-            
+
             client.query('DELETE FROM signature where e_id = $1;',[req.query.id], function(err, result2) {
             	if (err) {
                 	return next(err);
