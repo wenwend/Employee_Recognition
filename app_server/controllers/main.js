@@ -392,8 +392,14 @@ module.exports.deleteEmployee = function(req, res, next) {
             if (err) {
                 return next(err);
             }
+            
+            client.query('DELETE FROM signature where e_id = $1;',[req.query.id], function(err, result2) {
+            	if (err) {
+                	return next(err);
+            	}
             //res.send(200);
             res.render('mainMenuAdmin',{name:req.session.email});
+        });
         });
     } else {
         res.render('adminLogin', { err: "Invalid credentials" });
