@@ -50,7 +50,7 @@ block content
 							p#b64
 							img#img(height='150')
 							input.form_control(type='hidden' id='filename' name ='filename')
-							input.btn.btn-primary.btn-block(type="submit", id="uploadSignature")
+							button#uploadSignature.btn.btn-primary.btn-block(type='button' onClick='uploadSign()') Upload
 
 					.tab-pane.active(id="2")
 				
@@ -76,12 +76,7 @@ block content
 
 
 		document.getElementById("inp").addEventListener('change',readFile);
-		document.getElementById("uploadSignature").addEventListener('submit',function(){
-			
-			console.log(document.getElementById("b64").value);
-
-		}, false);
-
+		
 		function readFile(){
 
 			if (this.files && this.files[0]) {
@@ -94,6 +89,28 @@ block content
 	
 				FR.readAsDataURL( this.files[0] );
 			}
+
+		}
+		function uploadSign(){
+			console.log('save');
+			console.log(document.getElementById("b64").value);
+			var payload={};
+			
+			payload.file=document.getElementById("b64").value
+				
+			console.log(payload);
+			
+				var req= new XMLHttpRequest();
+				
+				req.onreadystatechange=function() {
+					if (req.readyState == XMLHttpRequest.DONE){
+						alert("Submitted! Please Refresh!");
+
+					}
+				}
+				req.open('post','http://localhost:5000/postSignature',true);
+				req.setRequestHeader('Content-Type','application/json');
+				req.send(JSON.stringify(payload));
 
 		}
 
@@ -124,7 +141,7 @@ block content
 			});
 		}
 
-		function saveSign(id){
+		function saveSign(){
 			console.log('saving');
 			var payload={};
 			

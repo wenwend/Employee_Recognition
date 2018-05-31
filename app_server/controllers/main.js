@@ -267,16 +267,15 @@ module.exports.postSignature=function(req,res,next){
 	if(req.session.userId && req.session.userType =='E'){
 		const data=req.body;
 		console.log(data.file);
-		
-		
-		client.query("UPDATE signature SET data =($1) WHERE e_id = ($2);",
-			[data.filename, req.session.userId], function(err,result){
+
+		client.query('INSERT INTO signature (data, e_id) VALUES ($1, $2) ON CONFLICT (e_id) DO UPDATE SET data = EXCLUDED.data;',
+			[data.file, req.session.userId], function(err,result){
 		if(err){
+			console.log(err);
 			return next(err);
 		}
 		
 		followMail(req.session.email, "You Changed your Signature!","/mainMenu");
-		
 		res.render('mainMenu',{ name:req.session.email });
 		});
 	}else{
@@ -293,13 +292,13 @@ module.exports.accountDetail = function(req, res, next) {
                 return next(err);
             }
             console.log(result.rows[0]);
-            var data ={
+            var user ={
             	email:result.rows[0].username,
             	first:result.rows[0].first_name,
             	last:result.rows[0].last_name,
             	sign:result.rows[0].data,
             };
-            res.render('accountDetail',{data});
+            res.render('accountDetail',{user});
         });
     } else {
         res.render('login', { err: "Invalid credentials" });
