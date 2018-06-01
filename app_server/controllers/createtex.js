@@ -66,7 +66,7 @@ fileContents += '\\end{document}';
 
 
 //SOURCE: https://www.w3schools.com/nodejs/nodejs_filesystem.asp
-fs.writeFile('award.tex', fileContents, function (err) {
+fs.writeFile('./app_server/controllers/award.tex', fileContents, function (err) {
   if (err) throw err;
   console.log('Award Created!');
 });
