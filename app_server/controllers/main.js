@@ -2,6 +2,8 @@ var request = require('request');
 var rp = require('request-promise-native');
 var moment = require('moment');
 var nodemailer = require('nodemailer');
+const shell = require('shelljs');
+
 var transporter = nodemailer.createTransport({
  service: 'gmail',
  auth: {
@@ -206,13 +208,18 @@ module.exports.postNewAward=function(req,res,next){
 		const data=req.body;
 		console.log(data);
 
-		client.query('INSERT INTO award(type, given_fname, given_lname, given_email, e_id, given_date,given_time) VALUES ($1,$2,$3,$4,$5,$6,$7);',
+		client.query('INSERT INTO award(type, given_fname, given_lname, given_email, e_id, given_date, given_time) VALUES ($1,$2,$3,$4,$5,$6,$7);',
 			[data.type, data.fname, data.lname, data.email, req.session.userId, data.date, data.time], function(err,result){
 		if(err){
 			return next(err);
 		}
+		var recipientName=data.fname +' '+ data.lname;
+		var signatureURL = './signature.jpg';
+		//the req.session.email should be presenter Name
+		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + req.session.email + '" "' + data.date + '" "' + data.email + '"');
+
 		//res.send(200);
-		followMail(data.email,"You got a reward!","/mainMenuAdmin");
+		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
 		res.render('mainMenu',{name:req.session.email});
 		});
 	} else{
