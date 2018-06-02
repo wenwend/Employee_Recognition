@@ -18,5 +18,5 @@ cat ./app_server/controllers/award.tex
 pdflatex ./app_server/controllers/award.tex
 #node ./app_server/controllers/converttex.js
 ls
-#node ./app_server/controllers/mailer.js "$6"
+node ./app_server/controllers/mailer.js "$6"
 echo "script done"
