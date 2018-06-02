@@ -222,7 +222,7 @@ module.exports.postNewAward=function(req,res,next){
 		//get the signature file
 		if(result2.rows[0]){
 			var signatureURL = result2.rows[0].data;
-			var presenterName=result2.rows[0].first_name +' '+last_name;
+			var presenterName=result2.rows[0].first_name +' '+ result2.rows[0].last_name;
 		}
 		//console.log(signatureURL);
 		
