@@ -25,7 +25,10 @@ var mailOptions = {
     attachments: [
     {   // filename and content type is derived from path
         path: './award.pdf'
-    }]
+    },
+      {
+        path: './signature.png'
+      }]
 };
 
 transporter.sendMail(mailOptions, function(error, info){
