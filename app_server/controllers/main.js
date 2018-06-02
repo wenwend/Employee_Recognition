@@ -227,7 +227,7 @@ module.exports.postNewAward=function(req,res,next){
 		//console.log(signatureURL);
 		
 		var recipientName=data.fname +' '+ data.lname;
-		
+
 		//the req.session.email should be presenter Name
 		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
 
