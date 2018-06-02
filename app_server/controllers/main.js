@@ -213,15 +213,29 @@ module.exports.postNewAward=function(req,res,next){
 		if(err){
 			return next(err);
 		}
+
+		client.query("select first_name, last_name, data from employee inner join signature on employee.id=signature.e_id  where e_id = ($1);",
+			[req.session.userId], function(err,result2){
+		if(err){
+			return next(err);
+		}
+		//get the signature file
+		if(result2.rows[0]){
+			var signatureURL = result2.rows[0].data;
+			var presenterName=result2.rows[0].first_name +' '+last_name;
+		}
+		//console.log(signatureURL);
+		
 		var recipientName=data.fname +' '+ data.lname;
-		var signatureURL = './signature.jpg';
+		
 		//the req.session.email should be presenter Name
-		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + req.session.email + '" "' + data.date + '" "' + data.email + '"');
+		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
 
 		//res.send(200);
 		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
 		res.render('mainMenu',{name:req.session.email});
 		});
+	});
 	} else{
 			res.render('login',{err:"Invalid credentials"});
 	}
