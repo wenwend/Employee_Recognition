@@ -24,7 +24,7 @@ var mailOptions = {
     text: message_body,
     attachments: [
     {   // filename and content type is derived from path
-        path: './app_server/controllers/award.pdf'
+        path: './award.pdf'
     },
       {
         path: './app_server/controllers/signature.png'
