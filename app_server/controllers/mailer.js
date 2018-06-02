@@ -24,10 +24,10 @@ var mailOptions = {
     text: message_body,
     attachments: [
     {   // filename and content type is derived from path
-        path: './award.pdf'
+        path: './app_server/controllsers/award.pdf'
     },
       {
-        path: './signature.png'
+        path: './app_server/controllsers/signature.png'
       }]
 };
 
