@@ -1,12 +1,9 @@
-imageID = process.argv[2]; //This is the id of the image received as a parameter
+//SOURCE: https://stackoverflow.com/questions/6926016/nodejs-saving-a-base64-encoded-image-to-disk
 
-//Use imageID to query the database
-var imageBase64 = //Data from query data:image/png;base64,iVBORw0KGgoAAAA....
+imageBase64 = process.argv[2]; //This is the image as a string received as a parameter
 
+var imageData = imageBase64.replace(/^data:image\/png;base64,/, "");  //Remove header data
 
-
-var base64Data = imageBase64.replace(/^data:image\/png;base64,/, "");
-
-require("fs").writeFile("./app_server/controllers/.png", base64Data, 'base64', function(err) {
+require("fs").writeFile("./app_server/controllers/signature.png", imageData, 'base64', function(err) {
   console.log(err);
 });

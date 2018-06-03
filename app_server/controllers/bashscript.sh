@@ -3,11 +3,12 @@
  echo "launching award creation script"
 # echo $1 #awardType    
 # echo $2 #recipientName
-# echo $3 #signatureURL
+echo $3 #signatureURL
 # echo $4 #presenterName
 # echo $5 #awardDate
 # echo $6 #recipientEmail
-node ./app_server/controllers/createtex.js "$1" "$2" "$3" "$4" "$5"
+node ./app_server/controllers/imageconverter.js $3
+node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.png" "$4" "$5"
 #echo "current directory"
 #ls
 #echo "./app_server/controllers"
