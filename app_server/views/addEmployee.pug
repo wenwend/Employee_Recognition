@@ -7,46 +7,44 @@ block content
 				.d-none.d-md-block.py-2
 					.d-flex.flex-row
 						img.small_logo(src="/img/Logo.png")
-						a.comp_name(href='/') User Toolkit
+						a.comp_name(href='/mainMenuAdmin') Admin toolkit
 				.d-sm-flex.flex-sm-row.d-block.col.py-2.text-sm-left.text-center.pr-0
 					.col.d-sm-flex.flex-sm-row.d-block.w-100.justify-content-start
-									
 						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/faq') FAQ
 					.col.w-100
 					.col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
-						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/') Sign Out
-						
-
-		container-fluid
-			row.col-md-2.d-none.d-md-block.bg-light.sidebar
-				sidebar-sticky.nav.flex-column
-					nav-item
-						a.nav-link.active(href="/mainMenuAdmin") Dashboard
-					nav-item
-						a.nav-link(href="/addEmployee") Add user
-					nav-item
-						a.nav-link(href="/employees") Manage User
-					nav-item
-						a.nav-link(href="/addAdmin") Add admin
-					nav-item
-						a.nav-link(href="/admins") Manage admin
-					nav-item
-						a.nav-link(href="/logout") Business analysis
-
-		.container
-			form(action='postNewEmployee', method='post' id='add-user-form')
-				fieldset(id='addE')
-					legend Add a new Employee
-					.form-group
-						label(for='email') Email
-						input.form_control(required type='email' id='email' name='email' placeholder='enter an email as your username')
-						.invalid-feedback Enter a valid email address
-					.form-group
-						label(for='pass') Password
-						input.form_control(required type='password' id='pass' name='pass' placeholder='123456')
-						.invalid-feedback Enter a valid password
-						input.btn.btn-primary.btn-block(type="submit", id="sendNewEmployee")
-
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/logout') Sign Out
+	.wrapper
+		nav#sidebar
+			ul.list-unstyled.components
+				li.active
+					a.nav-link.active(href="/mainMenuAdmin") Dashboard
+				li
+					a.nav-link(href="/addEmployee") Add user
+				li
+					a.nav-link(href="/employees") Manage User
+				li
+					a.nav-link(href="/addAdmin") Add admin
+				li
+					a.nav-link(href="/admins") Manage admin
+				li
+					a.nav-link(href="/") Business analysis
+		row
+			main.col-md-9.ml-sm-auto.px-4
+				form(action='postNewEmployee', method='post' id='add-user-form')
+					fieldset(id='addE')
+						legend Add a new Employee
+						.form-group
+							label(for='email') Email
+							input.form_control(required type='email' id='email' name='email' placeholder='enter an email as your username')
+							.invalid-feedback Enter a valid email address
+						.form-group
+							label(for='pass') Password
+							input.form_control(required type='password' id='pass' name='pass' placeholder='123456')
+							.invalid-feedback Enter a valid password
+							input.btn.btn-primary.btn-block(type="submit", id="sendNewEmployee")
+	p.mt-5.mb-3.text-muted &copy; 2018 Lynx
+	
 	script.
 
 		document.addEventListener("DOMContentLoaded", function(event) {
