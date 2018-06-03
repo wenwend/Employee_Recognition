@@ -10,32 +10,30 @@ block content
 						a.comp_name(href='/') Employee Awards
 				.d-sm-flex.flex-sm-row.d-block.col.py-2.text-sm-left.text-center.pr-0
 					.col.d-sm-flex.flex-sm-row.d-block.w-100.justify-content-start
-						a.d-sm-flex.flex-sm-row.d-block.active-link(href='mailto:lynx.no.reploy@gmail.com') Contact us		
+						a.d-sm-flex.flex-sm-row.d-block.active-link(href='mailto:lynx.no.reploy@gmail.com') Contact us			
 						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/faq') FAQ
 					.col.w-100
 					.col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
 						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/logout') Sign Out
 						
 
-	container-fluid
+	.wrapper
+		nav#sidebar
+			ul.list-unstyled.components
+				li.active
+					a.nav-link.active(href="/mainMenu") Dashboard
+				li
+					a.nav-link(href="/accountDetail") Account
+				li
+					a.nav-link(href="/newPassEmployee") Update Password
+				li
+					a.nav-link(href="/addSignature") Update Signature
+				li
+					a.nav-link(href="/addAward") Create Award
+				li
+					a.nav-link(href="/awards") Manage Award
 		row
-			nav.col-sm-3.col-md-3.d-none.d-md-block.bg-light.sidebar
-				sidebar-sticky
-					nav.flex-column
-					
-						a.nav-link.active(href="/mainMenu") Dashboard
-					
-						a.nav-link(href="/accountDetail") Account
-					
-						a.nav-link(href="/newPassEmployee") Update Password
-					
-						a.nav-link(href="/addSignature") Update Signature
-					
-						a.nav-link(href="/addAward") Create Award
-
-						a.nav-link(href="/awards") Manage Award
-
-			main.col-md-9.ml-sm-auto.col-lg-10.px-4
+			main.col-md-auto.ml-sm-auto.px-4
 				table.table-responsive.table-hover
 					captain
 					thead-light
@@ -53,3 +51,4 @@ block content
 							td.col-sm-3= d.date
 							td.col <a href=deleteAward?id=#{d.id}>Delete
 
+	p.mt-5.mb-3.text-muted &copy; 2018 Lynx

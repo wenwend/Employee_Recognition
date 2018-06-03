@@ -17,28 +17,24 @@ block content
 						a.d-sm-flex.flex-sm-row.d-block.active-link(href='/logout') Sign Out
 						
 
-	.container-fluid
+	.wrapper
+		nav#sidebar
+			ul.list-unstyled.components
+				li.active
+					a.nav-link.active(href="/mainMenu") Dashboard
+				li
+					a.nav-link(href="/accountDetail") Account
+				li
+					a.nav-link(href="/newPassEmployee") Update Password
+				li
+					a.nav-link(href="/addSignature") Update Signature
+				li
+					a.nav-link(href="/addAward") Create Award
+				li
+					a.nav-link(href="/awards") Manage Award
 		row
-			nav.col-sm-3.col-md-3.d-none.d-md-block.bg-light.sidebar
-				sidebar-sticky
-					nav.flex-column
-					
-						a.nav-link.active(href="/mainMenu") Dashboard
-					
-						a.nav-link(href="/accountDetail") Account
-					
-						a.nav-link(href="/newPassEmployee") Update Password
-					
-						a.nav-link(href="/addSignature") Update Signature
-					
-						a.nav-link(href="/addAward") Create Award
-
-						a.nav-link(href="/awards") Manage Award
-		row
-			main.col-md-9.ml-sm-auto.col-lg-10.px-4
+			main.col-md-9.ml-sm-auto.px-4
 				h2 HI, #{name}!
-				btn-toolbar.mb-2.mb-md-0
-					btn-group.mr-2
-						button.btn.btn-sm.btn-outline-secondary Share
-						button.btn.btn-sm.btn-outline-secondary Export
+		
+	p.mt-5.mb-3.text-muted &copy; 2018 Lynx
 
