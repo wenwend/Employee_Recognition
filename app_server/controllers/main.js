@@ -1,3 +1,7 @@
+/*
+	WENWEN DONG
+*/
+
 var request = require('request');
 var rp = require('request-promise-native');
 var moment = require('moment');
