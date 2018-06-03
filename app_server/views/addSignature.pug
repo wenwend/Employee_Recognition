@@ -60,20 +60,19 @@ block content
 						br
 						button#clearButton Clear
 						button#undoButton Undo
-						form#add-signature
-							input.form_control(type='hidden' id='file' name ='file')
-							br
-							button#sendSignature.btn.btn-primary.btn-block(type='button' onClick='saveSign()') Save
+						input.form_control(type='hidden' id='file' name ='file')
+						button#sendSignature.btn.btn-primary.btn-block Save
+							
 						br
 						br
 
 
 	script.
-
+		
 		document.addEventListener("DOMContentLoaded", function(event) {
 			addCanvas();
 		});
-
+		
 
 		document.getElementById("inp").addEventListener('change',readFile);
 		
@@ -114,16 +113,13 @@ block content
 		}
 
 		function addCanvas(){
+			
 			var canvas = document.getElementById("signature");
-			var form =document.getElementById("add-signature");
+		
 			var signaturePad = new SignaturePad(canvas, {
 				backgroundColor: 'rgb(255, 255, 255)'
 			});
 			
-			var fileData = signaturePad.toDataURL(); //pvg file in URI
-			document.getElementsByName("file")[0].setAttribute("value", fileData);
-
-			console.log(document.getElementById("file").value);
 			
 			//clear the canvas
 			clearButton.addEventListener("click", function (event) {
@@ -138,9 +134,17 @@ block content
 				signaturePad.fromData(data);
 				}
 			});
-		}
 
-		function saveSign(){
+			//save
+			sendSignature.addEventListener("click", function (event) {
+				if(signaturePad.isEmpty()){
+				alert('Please leave some signature!');
+			}
+			else{
+
+			var fileData = signaturePad.toDataURL(); //pvg file in URI
+			document.getElementsByName("file")[0].setAttribute("value", fileData);
+			console.log(document.getElementById("file").value);
 			console.log('saving');
 			var payload={};
 			
@@ -160,5 +164,6 @@ block content
 				req.open('post','//pacific-thicket-81385.herokuapp.com/postSignature',true);
 				req.setRequestHeader('Content-Type','application/json');
 				req.send(JSON.stringify(payload));
-			
+			}
+			})
 		}
