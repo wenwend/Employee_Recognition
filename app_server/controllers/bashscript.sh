@@ -9,6 +9,8 @@ echo $5 #awardDate
 echo $6 #recipientEmail
 node ./app_server/controllers/imageconverter.js $3
 node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.png" "$4" "$5"
+echo "award.tex"
+cat ./app_server/controllers/award.tex
 echo "current directory"
 ls
 echo "./app_server/controllers"
@@ -16,8 +18,8 @@ ls ./app_server/controllers
 #echo "root directory"
 #ls ../../
 #cat ./app_server/controllers/award.tex
-pdflatex ./app_server/controllers/award.tex
+#pdflatex ./app_server/controllers/award.tex
 #node ./app_server/controllers/converttex.js
 #ls
-node ./app_server/controllers/mailer.js "$6"
+#node ./app_server/controllers/mailer.js "$6"
 echo "award creation script done"
