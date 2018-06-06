@@ -251,8 +251,8 @@ module.exports.postNewAward=function(req,res,next){
 		//res.send(200);
 		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
 		res.render('mainMenu',{name:req.session.email});
-		}));
-	});
+		});
+	}));
 	} else{
 			res.render('login',{err:"Invalid credentials"});
 	}
