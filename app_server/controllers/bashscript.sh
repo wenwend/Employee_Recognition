@@ -1,28 +1,24 @@
 #!/bin/bash
 # bashscript.sh awardType recipientName signatureURL presenterName awardDate recipientEmail
  echo "launching award creation script"
-echo $1 #awardType    
-echo $2 #recipientName
-echo $3 #signatureURL
-echo $4 #presenterName
-echo $5 #awardDate
-echo $6 #recipientEmail
-node ./app_server/controllers/imageconverter.js $3
-node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.png" "$4" "$5"
-echo "award.tex"
-cat ./app_server/controllers/award.tex
-echo "current directory"
-ls
-echo "./app_server/controllers"
-ls ./app_server/controllers
-#echo "root directory"
-#ls ../../
-#cat ./app_server/controllers/award.tex
-#pdflatex ./app_server/controllers/award.tex
 
+#create image file from database
+node ./app_server/controllers/imageconverter.js $3
+
+#convert image to .jpg if necessary
+
+
+#create latex file from parameters
+node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.png" "$4" "$5"
+
+#USE THIS ONCE PNG TO JPG IS IMPLEMENTED
+#node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.jpg" "$4" "$5"
+
+
+#convert latex file into a pdf
 node ./app_server/controllers/converttex.js
-echo "./app_server/controllers"
-ls ./app_server/controllers
-#ls
-#node ./app_server/controllers/mailer.js "$6"
+
+#send pdf to recipientEmail
+node ./app_server/controllers/mailer.js "$6"
+
 echo "award creation script done"
