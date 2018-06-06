@@ -225,7 +225,7 @@ module.exports.postNewAward=function(req,res,next){
 		}
 		//get the signature file
 		if(result2.rows[0]){
-			var signatureURL = result2.rows[0].data;
+			var signatureData = result2.rows[0].data;
 			var presenterName=result2.rows[0].first_name +' '+ result2.rows[0].last_name;
 		}
 		//console.log(signatureURL);
@@ -241,17 +241,17 @@ module.exports.postNewAward=function(req,res,next){
 		}	
 		
 		if(result3.rows[0]){
-			awardType = result3.rows[0].award;
+			awardType = result3.rows[0].name;
 		}
 		
 		
 		//the req.session.email should be presenter Name
-		shell.exec('./app_server/controllers/bashscript.sh "' + awardType + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
+		shell.exec('./app_server/controllers/bashscript.sh "' + awardType + '" "' + recipientName + '" "' + signatureData + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
 
 		//res.send(200);
 		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
 		res.render('mainMenu',{name:req.session.email});
-		});
+		}));
 	});
 	} else{
 			res.render('login',{err:"Invalid credentials"});
