@@ -19,7 +19,7 @@ var fs = require('fs');
 
 awardType = process.argv[2];
 recipientName = process.argv[3];
-//signatureURL = process.argv[4]; Not needed. Image location is static
+signatureURL = process.argv[4];
 presenterName = process.argv[5];
 awardDate = process.argv[6];
 
