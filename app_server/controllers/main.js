@@ -1,7 +1,3 @@
-/*
-	WENWEN DONG
-*/
-
 var request = require('request');
 var rp = require('request-promise-native');
 var moment = require('moment');
@@ -225,34 +221,21 @@ module.exports.postNewAward=function(req,res,next){
 		}
 		//get the signature file
 		if(result2.rows[0]){
-			var signatureData = result2.rows[0].data;
+			var signatureURL = result2.rows[0].data;
 			var presenterName=result2.rows[0].first_name +' '+ result2.rows[0].last_name;
 		}
 		//console.log(signatureURL);
 		
 		var recipientName=data.fname +' '+ data.lname;
-		
-		//Get the type of award being created
-		var awardType;
-		client.query("select name from award_type where id = ($1);",
-			[data.type], function(err,result3){
-		if(err){
-			return next(err);
-		}	
-		
-		if(result3.rows[0]){
-			awardType = result3.rows[0].name;
-		}
-		
-		
+
 		//the req.session.email should be presenter Name
-		shell.exec('./app_server/controllers/bashscript.sh "' + awardType + '" "' + recipientName + '" "' + signatureData + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
+		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
 
 		//res.send(200);
 		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
 		res.render('mainMenu',{name:req.session.email});
 		});
-	}));
+	});
 	} else{
 			res.render('login',{err:"Invalid credentials"});
 	}
