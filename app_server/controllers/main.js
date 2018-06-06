@@ -231,9 +231,22 @@ module.exports.postNewAward=function(req,res,next){
 		//console.log(signatureURL);
 		
 		var recipientName=data.fname +' '+ data.lname;
-
+		
+		//Get the type of award being created
+		var awardType;
+		client.query("select name from award_type where id = ($1);",
+			[data.type], function(err,result3){
+		if(err){
+			return next(err);
+		}	
+		
+		if(result3.rows[0]){
+			awardType = result3.rows[0].award;
+		}
+		
+		
 		//the req.session.email should be presenter Name
-		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
+		shell.exec('./app_server/controllers/bashscript.sh "' + awardType + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
 
 		//res.send(200);
 		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
