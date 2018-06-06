@@ -202,43 +202,53 @@ module.exports.postNewAdmin=function(req,res,next){
 };
 
 //postNewAdmin
-module.exports.postNewAward=function(req,res,next){
-	console.log(req.body);
-	if(req.session.userId && req.session.userType =='E'){
-		const data=req.body;
-		console.log(data);
+module.exports.postNewAward = function(req, res, next) {
+    console.log(req.body);
+    if (req.session.userId && req.session.userType == 'E') {
+        const data = req.body;
+        console.log(data);
 
-		client.query('INSERT INTO award(type, given_fname, given_lname, given_email, e_id, given_date, given_time) VALUES ($1,$2,$3,$4,$5,$6,$7);',
-			[data.type, data.fname, data.lname, data.email, req.session.userId, data.date, data.time], function(err,result){
-		if(err){
-			return next(err);
-		}
+        client.query('INSERT INTO award(type, given_fname, given_lname, given_email, e_id, given_date, given_time) VALUES ($1,$2,$3,$4,$5,$6,$7);', [data.type, data.fname, data.lname, data.email, req.session.userId, data.date, data.time], function(err, result) {
+        if (err) {
+            return next(err);
+        }
 
-		client.query("select first_name, last_name, data from employee inner join signature on employee.id=signature.e_id  where e_id = ($1);",
-			[req.session.userId], function(err,result2){
-		if(err){
-			return next(err);
-		}
-		//get the signature file
-		if(result2.rows[0]){
-			var signatureURL = result2.rows[0].data;
-			var presenterName=result2.rows[0].first_name +' '+ result2.rows[0].last_name;
-		}
-		//console.log(signatureURL);
-		
-		var recipientName=data.fname +' '+ data.lname;
+        client.query("select first_name, last_name, data from employee inner join signature on employee.id=signature.e_id where e_id = ($1);", [req.session.userId], function(err, result2) {
+        if (err) {
+            return next(err);
+        }
+        //get the signature file
+        if (result2.rows[0]) {
+            var signatureData = result2.rows[0].data;
+            var presenterName = result2.rows[0].first_name + ' ' + result2.rows[0].last_name;
+        }
+        //console.log(signatureURL);
 
-		//the req.session.email should be presenter Name
-		shell.exec('./app_server/controllers/bashscript.sh "' + data.type + '" "' + recipientName + '" "' + signatureURL + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
+        var recipientName = data.fname + ' ' + data.lname;
 
-		//res.send(200);
-		//followMail(data.email,"You got a reward!","/mainMenuAdmin");
-		res.render('mainMenu',{name:req.session.email});
-		});
-	});
-	} else{
-			res.render('login',{err:"Invalid credentials"});
-	}
+        //the req.session.email should be presenter Name
+        var awardType;
+        client.query("select name from award_type where id = ($1);", [data.type], function(err, result3) {
+            if (err) {
+                return next(err);
+        }
+
+        if (result3.rows[0]) {
+            awardType = result3.rows[0].name;
+        }
+
+        shell.exec('./app_server/controllers/bashscript.sh "' + awardType + '" "' + recipientName + '" "' + signatureData + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
+
+        //res.send(200);
+        //followMail(data.email,"You got a reward!","/mainMenuAdmin");
+        res.render('mainMenu', { name: req.session.email });
+        });
+        });
+        });
+    } 
+    else {
+        res.render('login', { err: "Invalid credentials" });
+    }
 };
 
 //newPassEmployee
