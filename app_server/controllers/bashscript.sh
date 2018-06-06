@@ -1,18 +1,18 @@
 #!/bin/bash
 # bashscript.sh awardType recipientName signatureURL presenterName awardDate recipientEmail
  echo "launching award creation script"
-# echo $1 #awardType    
-# echo $2 #recipientName
+echo $1 #awardType    
+echo $2 #recipientName
 echo $3 #signatureURL
-# echo $4 #presenterName
-# echo $5 #awardDate
-# echo $6 #recipientEmail
+echo $4 #presenterName
+echo $5 #awardDate
+echo $6 #recipientEmail
 node ./app_server/controllers/imageconverter.js $3
 node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.png" "$4" "$5"
-#echo "current directory"
-#ls
-#echo "./app_server/controllers"
-#ls ./app_server/controllers
+echo "current directory"
+ls
+echo "./app_server/controllers"
+ls ./app_server/controllers
 #echo "root directory"
 #ls ../../
 #cat ./app_server/controllers/award.tex
