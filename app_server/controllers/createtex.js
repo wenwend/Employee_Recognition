@@ -9,7 +9,6 @@ var fs = require('fs');
 // console.log(process.argv[3]);
 // console.log(process.argv[4]);
 // console.log(process.argv[5]);
-// console.log(process.argv[5]);
 
 //DEBUGGING VALUES
 // awardType = "Employee of the Year";
@@ -20,7 +19,7 @@ var fs = require('fs');
 
 awardType = process.argv[2];
 recipientName = process.argv[3];
-signatureURL = process.argv[4];
+//signatureURL = process.argv[4]; Not needed. Image location is static
 presenterName = process.argv[5];
 awardDate = process.argv[6];
 
