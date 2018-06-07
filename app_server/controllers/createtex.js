@@ -3,14 +3,13 @@ var fs = require('fs');
 //node createtex.js awardType recipientName signatureURL presenterName awardDate
 
 //Process the arguments
-// console.log(process.argv[0]); node
-// console.log(process.argv[1]); createtex.js
-// console.log(process.argv[2]); awardType
-// console.log(process.argv[3]); recipientName
-// console.log(process.argv[4]); signatureURL
-// console.log(process.argv[5]); presenterName
-// console.log(process.argv[6]); awardDate
-
+// console.log(process.argv[0]);
+// console.log(process.argv[1]);
+// console.log(process.argv[2]);
+// console.log(process.argv[3]);
+// console.log(process.argv[4]);
+// console.log(process.argv[5]);
+// console.log(process.argv[5]);
 
 //DEBUGGING VALUES
 // awardType = "Employee of the Year";
@@ -57,10 +56,9 @@ fileContents += '\\Huge \\textbf{\\\\' + recipientName + '\\\\[0.4in]} \\par\n';
 fileContents += '\\large \\textbf{On ' + awardDate + '}\n';
 fileContents += '\n';
 fileContents += '%%% SIGNATURE AND PRESENTER\n';
-fileContents += '\vspace{3cm}\n';
-fileContents += '\\includegraphics[width=3in, height=1.5in]{' + signatureURL + '}\\\\[1mm]\n';
-fileContents += '\\vspace{-2cm}{\\rule[0.6in]{3in}{.1pt}}\n';
-fileContents += '\\vspace{-1.5cm}{\\fontsize{12}{14}\\selectfont \\textbf{\\\\[.1mm]Presented By ' + presenterName + '}}\n';
+fileContents += '\\includegraphics[width=4in, height=2in]{' + signatureURL + '}\\\\[1mm]\n';
+fileContents += '\\vspace{-2cm}{\\rule[0.6in]{4in}{.1pt}}\n';
+fileContents += '\\vspace{-1.5cm}{\\fontsize{12}{14}\\selectfont \\textbf{\\\\[.1mm]' + presenterName + '}}\n';
 fileContents += '\n';
 fileContents += '\\end{center}\n';
 fileContents += '\\end{landscape}\n';
