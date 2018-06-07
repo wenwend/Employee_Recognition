@@ -39,7 +39,6 @@ var deleteAdmins = require('./app_server/routes/deleteAdmins');
 var deleteAward = require('./app_server/routes/deleteAward');
 var editEmployee = require('./app_server/routes/editEmployee');
 var editAdmins = require('./app_server/routes/editAdmins');
-var numAwards = require('./app_server/routes/numAwards');
 
 var app = express();
 
@@ -61,11 +60,11 @@ app.use(session({ secret: 'keyboard car', cookie: { maxAge: 60000 } }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/faq', faq);
+app.use('/faq',faq);
 app.use('/login', login);
-app.use('/logout', logout);
-app.use('/contact', contact);
-app.use('/postContact', postContact);
+app.use('/logout',logout);
+app.use('/contact',contact);
+app.use('/postContact',postContact);
 app.use('/adminLogin', adminLogin);
 app.use('/postLogin', postLogin);
 app.use('/postLoginAdmin', postLoginAdmin);
@@ -88,9 +87,8 @@ app.use('/deleteEmployee', deleteEmployee);
 app.use('/deleteAdmins', deleteAdmins);
 app.use('/admins', admins);
 app.use('/deleteAward', deleteAward);
-app.use('/editEmployee', editEmployee);
-app.use('/editAdmins', editAdmins);
-app.use('/numAwards', numAwards);
+app.use('/editEmployee',editEmployee);
+app.use('/editAdmins',editAdmins);
 
 
 // catch 404 and forward to error handler
