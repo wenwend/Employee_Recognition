@@ -1,46 +1,51 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 .wrapper {
     display: flex;
     align-items: stretch;
     perspective: 1500px;
 }
+
 #sidebar {
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
     background: #a2d1df;
     color: #fff;
-    transition: all 0.6s cubic-bezier(0.945,0.020,0.270,0.665);
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: center left;
 }
-#sidebar ul.components{
+
+#sidebar ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #47748b;
 }
 
-#sidebar ul p{
-    color: #fff
-    padding:10px;
+#sidebar ul p {
+    color: #fff padding: 10px;
 }
 
-#sidebar ul li a{
+#sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
 }
 
-#sidebar ul li a:hover{
+#sidebar ul li a:hover {
     color: #7386D5;
     background: #fff;
 }
-#sidebar ul li.active > a{
-    color:#fff;
-    background: #6d7fcc
-    margin-left: -250px;
 
+#sidebar ul li.active>a {
+    color: #fff;
+    background: #6d7fcc margin-left: -250px;
 }
 
+.bicontainer {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: auto;
+}
 
 .mynavbar {
     background-color: #3B4856;
@@ -54,7 +59,7 @@
 }
 
 body {
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #fafafa;
 }
 

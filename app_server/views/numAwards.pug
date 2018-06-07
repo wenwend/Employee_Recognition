@@ -1,0 +1,119 @@
+extend layout
+
+block scripts
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    script(type='text/javascript').
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages':['corechart', 'controls']});
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+        var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1opjvfz9iroqTtDxgiD7jqMD9PFuwftq9bRvST-FZtkw/edit?usp=sharing");
+        query.send(drawDashboard);
+        }
+
+        function drawDashboard(response) {
+        var data = response.getDataTable();
+
+        var awardSlider = new google.visualization.ControlWrapper({
+            'controlType': 'NumberRangeFilter',
+            'containerId': 'filter_div',
+            'options':{
+                'filterColumnIndex': '1',
+                'ui': {
+                    'label': 'Number Of Awards Per Receipient'
+                }
+            }
+        });
+        var awardPieChart = new google.visualization.ChartWrapper({
+            'chartType': 'PieChart',
+            'containerId': 'chart_div',
+            'options:':{
+                'height': 200,
+                'width': 200
+            },
+            'view': {'columns': [0, 1]}
+
+        });
+
+        var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
+        dashboard.bind(awardSlider, awardPieChart);
+        dashboard.draw(data);
+        }
+        
+block content
+    .container-fluid.p-0.m-0
+        nav.navbar.mynavbar.sticky-top.px-2
+            .container
+                .d-none.d-md-block.py-2
+                    .d-flex.flex-row
+                        img.small_logo(src="/img/Logo.png")
+                        a.comp_name(href='/') Recognize
+                .d-sm-flex.flex-sm-row.d-block.col.py-2.text-sm-left.text-center.pr-0
+                    .col.d-sm-flex.flex-sm-row.d-block.w-100.justify-content-start
+                        a.d-sm-flex.flex-sm-row.d-block.inactive-link(href='/') Home
+                        a.d-sm-flex.flex-sm-row.d-block.active-link(href='/faq') FAQ
+                    .col.w-100
+                        .col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
+                            a.d-sm-flex.flex-sm-row.d-block.active-link(href='/logout') Log Out
+    
+        .container.mycontainer.p-3.m-auto.h-100
+            #dashboard.p-3.m-auto.h-100
+                #filter_div.pl-3.m-auto.h-100
+                #chart_div.p-0.m-auto.h-100
+        .container.mycontainer.p-3.m-auto.h-100
+            #dashboard1.p-0.m-auto.h-auto
+                #filter_div1.pl-3.m-auto.h-100
+                #filter_div1b.pl-3.m-auto.h-100
+                #chart_div1.m-auto.h-100
+
+    script(type='text/javascript').
+            // Load the Visualization API and the piechart package.
+            google.charts.load('current', {'packages':['corechart', 'controls']});
+
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+            var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1C1eNneSjiAM8tQQg3HUPb2bHnwZFEApQIZYuQJifi3E/edit?usp=sharing");
+            query.send(drawDashboarda);
+            }
+
+            function drawDashboarda(response) {
+            var data = response.getDataTable();
+
+            var awardSlider = new google.visualization.ControlWrapper({
+                'controlType': 'NumberRangeFilter',
+                'containerId': 'filter_div1',
+                'options':{
+                    'filterColumnIndex': '2',
+                    'ui': {
+                        'label': 'Number Of Awards Given by Employee'
+                    }
+                }
+            });
+             var categorySlider = new google.visualization.ControlWrapper({
+                'controlType': 'CategoryFilter',
+                'containerId': 'filter_div1b',
+                'options':{
+                    'filterColumnIndex': '1',
+                    'ui': {
+                        'label': 'Award Type'
+                    }
+                }
+            });
+            var awardPieChart = new google.visualization.ChartWrapper({
+                'chartType': 'PieChart',
+                'containerId': 'chart_div1',
+                'options:':{
+                    'height': 500,
+                    'width': 500
+                },
+                'view': {'columns': [0, 2]}
+
+            });
+
+            var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard1'));
+            dashboard.bind(awardSlider, awardPieChart).bind(categorySlider, awardPieChart);
+            dashboard.draw(data);
+            }
