@@ -4,6 +4,7 @@ recipientEmail = process.argv[2];
 
 var message_body = '';
 message_body += 'Hello,\n';
+message_body += '\n';
 message_body += 'For your hard work and accomplishments, you\'ve been sent the attached award!\n';
 message_body += '\n';
 message_body += '\n';

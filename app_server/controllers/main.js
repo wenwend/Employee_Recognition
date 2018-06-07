@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*
 	WENWEN DONG, Sarah Harber, Jon Reynolds
 */
 
+=======
+>>>>>>> 78b9a9e752ed6584c2a5542097b58a9fd16ffdf7
 var request = require('request');
 var rp = require('request-promise-native');
 var moment = require('moment');
@@ -206,6 +209,7 @@ module.exports.postNewAward = function(req, res, next) {
         console.log(data);
 
         client.query('INSERT INTO award(type, given_fname, given_lname, given_email, e_id, given_date, given_time) VALUES ($1,$2,$3,$4,$5,$6,$7);', [data.type, data.fname, data.lname, data.email, req.session.userId, data.date, data.time], function(err, result) {
+<<<<<<< HEAD
             if (err) {
                 return next(err);
             }
@@ -232,6 +236,46 @@ module.exports.postNewAward = function(req, res, next) {
             });
         });
     } else {
+=======
+        if (err) {
+            return next(err);
+        }
+
+        client.query("select first_name, last_name, data from employee inner join signature on employee.id=signature.e_id where e_id = ($1);", [req.session.userId], function(err, result2) {
+        if (err) {
+            return next(err);
+        }
+        //get the signature file
+        if (result2.rows[0]) {
+            var signatureData = result2.rows[0].data;
+            var presenterName = result2.rows[0].first_name + ' ' + result2.rows[0].last_name;
+        }
+        //console.log(signatureURL);
+
+        var recipientName = data.fname + ' ' + data.lname;
+
+        //the req.session.email should be presenter Name
+        var awardType;
+        client.query("select name from award_type where id = ($1);", [data.type], function(err, result3) {
+            if (err) {
+                return next(err);
+        }
+
+        if (result3.rows[0]) {
+            awardType = result3.rows[0].name;
+        }
+
+        shell.exec('./app_server/controllers/bashscript.sh "' + awardType + '" "' + recipientName + '" "' + signatureData + '" "' + presenterName + '" "' + data.date + '" "' + data.email + '"');
+
+        //res.send(200);
+        //followMail(data.email,"You got a reward!","/mainMenuAdmin");
+        res.render('mainMenu', { name: req.session.email });
+        });
+        });
+        });
+    } 
+    else {
+>>>>>>> 78b9a9e752ed6584c2a5542097b58a9fd16ffdf7
         res.render('login', { err: "Invalid credentials" });
     }
 };
