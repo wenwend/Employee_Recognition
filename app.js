@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // session cookie
-app.use(session({ secret: 'keyboard car', cookie: { maxAge: 60000 } }));
+app.use(session({ secret: 'keyboard car', cookie: { maxAge: 900000 } }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
