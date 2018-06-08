@@ -24,6 +24,7 @@
         "npm": "5.6.0",
         "pdflatex": "~0.0.1",
         "pg": "^7.4.1",
+        "png-to-jpeg": "~1.0.1",
         "pug": "^2.0.3",
         "request": "^2.81.0",
         "request-promise-native": "^1.0.5",
