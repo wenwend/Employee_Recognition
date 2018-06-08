@@ -57,7 +57,21 @@ block content
                     .col.w-100
                         .col.d-sm-flex.flex-sm-row.d-block.w-100.text-sm-left.text-center.justify-content-end.pr-0
                             a.d-sm-flex.flex-sm-row.d-block.active-link(href='/logout') Log Out
-    
+    .wrapper
+		nav#sidebar
+			ul.list-unstyled.components
+				li.active
+					a.nav-link.active(href="/mainMenu") Dashboard
+				li
+					a.nav-link(href="/accountDetail") Account
+				li
+					a.nav-link(href="/newPassEmployee") Update Password
+				li
+					a.nav-link(href="/addSignature") Update Signature
+				li
+					a.nav-link(href="/addAward") Create Award
+				li
+					a.nav-link(href="/awards") Manage Award
         .container.mycontainer.p-3.m-auto.h-100
             #dashboard.p-3.m-auto.h-100
                 #filter_div.pl-3.m-auto.h-100
