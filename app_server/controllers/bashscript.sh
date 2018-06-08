@@ -9,7 +9,7 @@ node ./app_server/controllers/imageconverter.js $3
 SIGPNG="./app_server/controllers/signature.png"
 if [ -f $SIGPNG ]; then #Convert the png
    echo "Converting signature to jpg"
-   node pngtojpg.js
+   node ./app_server/controllers/pngtojpg.js
 fi
 
 #create latex file from parameters
@@ -31,6 +31,9 @@ else
    echo "using samplesignature.jpg"
    node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/samplesignature.jpg" "$4" "$5"
 fi
+
+#echo "./app_server/controllers"
+#ls ./app_server/controllers
 
 #convert latex file into a pdf
 pdflatex ./app_server/controllers/award.tex
