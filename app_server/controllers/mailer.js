@@ -1,7 +1,8 @@
 var nodemailer = require('nodemailer');
 
-recipientEmail = process.argv[2];
+recipientEmail = process.argv[2]; //To: Email Address
 
+//Build the message body
 var message_body = '';
 message_body += 'Hello,\n';
 message_body += '\n';
@@ -24,7 +25,7 @@ var mailOptions = {
     subject: 'Congratulations! You\'ve been sent an award!',
     text: message_body,
     attachments: [
-    {   // filename and content type is derived from path
+    {   // Attach award
         path: './award.pdf'
     }]
 };
