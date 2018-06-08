@@ -3,6 +3,6 @@
 const fs = require("fs");
 const pngToJpeg = require('png-to-jpeg');
  
-let buffer = fs.readFileSync(".app_server/controllers/signature.png");
+let buffer = fs.readFileSync("./signature.png");
 pngToJpeg({quality: 90})(buffer)
 .then(output => fs.writeFileSync("./signature.jpg", output));
