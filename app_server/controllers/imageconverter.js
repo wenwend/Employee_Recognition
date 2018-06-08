@@ -10,7 +10,7 @@ if (imageBase64.startsWith('data:image/png'))
 {
     console.log('png');
     var imageData = imageBase64.replace(/^data:image\/png;base64,/, "");  //Remove header data
-    require("fs").writeFile("./signature.png", imageData, 'base64', function(err) {
+    require("fs").writeFile("./app_server/controllers/signature.png", imageData, 'base64', function(err) {
         console.log(err);
     });
 }
@@ -18,7 +18,7 @@ else if (imageBase64.startsWith('data:image/jpeg'))
 {
     console.log('jpg');
     var imageData = imageBase64.replace(/^data:image\/jpeg;base64,/, "");  //Remove header data
-    require("fs").writeFile("./signature.jpg", imageData, 'base64', function(err) {
+    require("fs").writeFile("./app_server/controllers/signature.jpg", imageData, 'base64', function(err) {
         console.log(err);
     });
 }
