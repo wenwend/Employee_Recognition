@@ -57,7 +57,7 @@ fileContents += '\\Huge \\textbf{\\\\' + recipientName + '\\\\[0.4in]} \\par\n';
 fileContents += '\\large \\textbf{On ' + awardDate + '}\n';
 fileContents += '\n';
 fileContents += '%%% SIGNATURE AND PRESENTER\n';
-fileContents += '\vspace{3cm}\n';
+fileContents += '\\vspace{3cm}\n';
 fileContents += '\\includegraphics[width=3in, height=1.5in]{' + signatureURL + '}\\\\[1mm]\n';
 fileContents += '\\vspace{-2cm}{\\rule[0.6in]{3in}{.1pt}}\n';
 fileContents += '\\vspace{-1.5cm}{\\fontsize{12}{14}\\selectfont \\textbf{\\\\[.1mm]Presented By ' + presenterName + '}}\n';
