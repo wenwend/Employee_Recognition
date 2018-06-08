@@ -12,9 +12,6 @@ if [ -f $SIGPNG ]; then #Convert the png
    node ./app_server/controllers/pngtojpg.js
 fi
 
-#create latex file from parameters
-#node ./app_server/controllers/createtex.js "$1" "$2" "./app_server/controllers/signature.png" "$4" "$5"
-
 #echo "current directory"
 #ls
 echo "./app_server/controllers"
